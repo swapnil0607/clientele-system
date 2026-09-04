@@ -50,6 +50,10 @@ function get_active_employee(string $email): ?array
 
 function employee_can_access_admin(string $email): bool
 {
+    if (!empty($_SESSION['admin_user_id'])) {
+        return true;
+    }
+
     $employee = get_active_employee($email);
     if (!$employee) {
         return false;
@@ -60,6 +64,10 @@ function employee_can_access_admin(string $email): bool
 
 function employee_is_super_admin(string $email): bool
 {
+    if (!empty($_SESSION['admin_user_id'])) {
+        return true;
+    }
+
     $employee = get_active_employee($email);
     if (!$employee || !array_key_exists('is_super_admin', $employee)) {
         return false;

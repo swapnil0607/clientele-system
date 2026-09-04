@@ -1,4 +1,4 @@
-﻿-- ==============================================================================
+-- ==============================================================================
 -- Clientele Online Pre-filled Dummy Data (All passwords: Demo@2026!)
 -- ==============================================================================
 
@@ -16,7 +16,8 @@ TRUNCATE TABLE `admin_users`;
 -- 1. Admin Users (Password: Demo@2026!)
 INSERT INTO `admin_users` (`id`, `username`, `password_hash`, `is_active`, `created_at`) VALUES
 (1, 'admin', '$2y$10$T3rGt8ReaE4v5tneu9mOduWR/HCYOIW75pa8JxMeQTIGo4B6LYGP.', 1, NOW()),
-(2, 'swapnil', '$2y$10$T3rGt8ReaE4v5tneu9mOduWR/HCYOIW75pa8JxMeQTIGo4B6LYGP.', 1, NOW());
+(2, 'swapnil', '$2y$10$T3rGt8ReaE4v5tneu9mOduWR/HCYOIW75pa8JxMeQTIGo4B6LYGP.', 1, NOW()),
+(3, 'admin@demo.com', '$2y$10$T3rGt8ReaE4v5tneu9mOduWR/HCYOIW75pa8JxMeQTIGo4B6LYGP.', 1, NOW());
 
 -- 2. Employees (SSO & Admin access)
 INSERT INTO `employees` (`id`, `name`, `email`, `can_access_admin`, `is_super_admin`, `is_active`) VALUES

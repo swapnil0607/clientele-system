@@ -1,0 +1,26 @@
+# Environment & Secrets
+.env
+.env.*
+*.local.php
+
+# Confidential Live Dumps & Seeds
+database/seed.sql
+*.csv
+clientele.sql
+*.sql.bak
+
+# Server Logs & Temp Files
+php-server.err
+php-server.out
+error_log
+*.log
+
+# Operating System & IDE
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+
+# Local Runtime Uploads
+uploads/*
+!uploads/.gitkeep

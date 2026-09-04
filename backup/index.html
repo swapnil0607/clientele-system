@@ -1,0 +1,1972 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Our Clientele | Eduriser</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;900&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            scroll-behavior: smooth;
+            background-color: #ffffff;
+        }
+        /* Hero Banner with Background Image */
+        .hero-banner {
+            position: relative;
+            background-image: url('https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&q=80&w=2000');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            min-height: calc(100vh - 5.5rem);
+            min-height: calc(100dvh - 5.5rem);
+            padding: clamp(1.75rem, 3vh, 3rem) 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+        .hero-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, rgba(15, 23, 42, 0.95) 0%, rgba(30, 58, 138, 0.8) 100%);
+        }
+        .hero-content {
+            position: relative;
+            z-index: 10;
+            width: 100%;
+        }
+        .hero-eyebrow {
+            color: rgba(255, 255, 255, 0.92);
+        }
+        .hero-gradient-title {
+            background: linear-gradient(180deg, #f8fbff 0%, #dbeafe 34%, #70B3FF 66%, #0550AB 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            text-shadow: 0 8px 24px rgba(96, 165, 250, 0.18);
+        }
+        .hero-subtitle {
+            font-size: clamp(1rem, 1.15vw, 1.25rem);
+            line-height: 1.45;
+        }
+
+        /* Value Cards in Hero */
+        .value-card {
+            background: linear-gradient(180deg, rgba(255, 255, 255, 0.85) 0%, rgba(248, 250, 252, 0.85) 100%);
+            backdrop-filter: none;
+            border: 1px solid rgba(191, 219, 254, 0.8);
+            padding: 1.5rem;
+            border-radius: 1rem;
+            box-shadow:
+                0 18px 38px -28px rgba(15, 23, 42, 0.55),
+                inset 0 1px 0 rgba(255, 255, 255, 0.92);
+            transition: box-shadow 0.2s ease;
+        }
+        .value-card:hover {
+            box-shadow:
+                0 18px 38px -28px rgba(15, 23, 42, 0.55),
+                inset 0 1px 0 rgba(255, 255, 255, 0.92);
+        }
+        .hero-value-layout {
+            margin-top: 2rem;
+            width: 100%;
+            max-width: 72rem;
+            margin-left: auto;
+            margin-right: auto;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1rem;
+        }
+        .value-card--featured {
+            width: 100%;
+            text-align: center;
+            min-width: 0;
+        }
+        .featured-value-icon {
+            margin: 0 auto 1rem;
+        }
+        .feature-icon-wrap {
+            width: 2.75rem;
+            height: 2.75rem;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 0.85rem;
+            background: linear-gradient(180deg, #eff6ff 0%, #dbeafe 100%);
+            border: 1px solid rgba(147, 197, 253, 0.55);
+            box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.92);
+        }
+        .feature-icon {
+            color: #2563eb;
+        }
+        .value-card-title {
+            color: #0f172a;
+        }
+        .value-card-grid {
+            width: 100%;
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 1.5rem;
+            min-width: 0;
+        }
+        .value-card-copy {
+            color: #475569;
+            font-size: 0.875rem;
+            line-height: 1.7;
+        }
+        .featured-value-copy {
+            max-width: none;
+            white-space: nowrap;
+            font-size: 0.8rem;
+            line-height: 1.4;
+        }
+        .hero-value-layout .value-card {
+            min-width: 0;
+        }
+        .logo-marquee {
+            position: relative;
+            width: 100%;
+            margin-top: 1rem;
+            padding: 0 3.15rem;
+        }
+        .logo-marquee-stage {
+            position: relative;
+            overflow-x: auto;
+            overflow-y: hidden;
+            border-radius: 0.9rem;
+            padding: 0.8rem 0;
+            background: linear-gradient(180deg, #ffffff 0%, #fbfdff 100%);
+            border: 1px solid rgba(203, 213, 225, 0.75);
+            box-shadow:
+                inset 0 1px 0 rgba(255, 255, 255, 0.98),
+                inset 0 0 0 1px rgba(241, 245, 249, 0.9),
+                0 10px 26px -24px rgba(15, 23, 42, 0.28);
+            scrollbar-width: none;
+            -ms-overflow-style: none;
+            cursor: grab;
+            user-select: none;
+            touch-action: pan-x;
+            scroll-behavior: auto;
+        }
+        .logo-marquee-stage::-webkit-scrollbar {
+            display: none;
+        }
+        .logo-marquee-stage.is-dragging {
+            cursor: grabbing;
+            scroll-behavior: auto;
+        }
+        .logo-marquee-stage::before,
+        .logo-marquee-stage::after {
+            content: "";
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            width: 3.75rem;
+            z-index: 2;
+            pointer-events: none;
+        }
+        .logo-marquee-stage::before {
+            left: 0;
+            background: linear-gradient(90deg, rgba(255, 255, 255, 0.98) 0%, rgba(255, 255, 255, 0) 100%);
+        }
+        .logo-marquee-stage::after {
+            right: 0;
+            background: linear-gradient(270deg, rgba(255, 255, 255, 0.98) 0%, rgba(255, 255, 255, 0) 100%);
+        }
+        .logo-track {
+            display: flex;
+            width: max-content;
+        }
+        .logo-track-group {
+            display: flex;
+            align-items: center;
+            gap: 1.75rem;
+            padding: 0 1.75rem;
+            flex-shrink: 0;
+        }
+        .logo-chip {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-width: 6rem;
+            height: 4.25rem;
+            padding: 0 0.5rem;
+            flex-shrink: 0;
+        }
+        .university-logo {
+            display: block;
+            width: auto;
+            max-width: 8.75rem;
+            max-height: 4.35rem;
+            object-fit: contain;
+            object-position: center;
+            filter: saturate(1.02) contrast(1.03);
+            opacity: 0.98;
+            pointer-events: none;
+        }
+        .logo-nav {
+            position: absolute;
+            top: 50%;
+            z-index: 4;
+            width: 2.55rem;
+            height: 2.55rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 9999px;
+            border: 1px solid rgba(203, 213, 225, 0.92);
+            background: rgba(255, 255, 255, 0.96);
+            color: #2563eb;
+            box-shadow: 0 14px 28px -20px rgba(15, 23, 42, 0.45);
+            transform: translateY(-50%);
+            transition: background-color 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease, color 0.2s ease;
+        }
+        .logo-nav:hover {
+            background: #eff6ff;
+            border-color: rgba(147, 197, 253, 0.95);
+            box-shadow: 0 16px 30px -20px rgba(37, 99, 235, 0.32);
+            color: #1d4ed8;
+        }
+        .logo-nav:focus-visible {
+            outline: 2px solid rgba(59, 130, 246, 0.35);
+            outline-offset: 2px;
+        }
+        .logo-nav--prev {
+            left: 0;
+        }
+        .logo-nav--next {
+            right: 0;
+        }
+
+        /* Standardized Client Cards */
+        .client-card {
+            position: relative;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            border: 1px solid #e5e7eb;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 1rem;
+            height: 110px;
+            width: 100%;
+            border-radius: 0.75rem;
+            background: white;
+            cursor: pointer;
+        }
+        .client-card:hover {
+            border-color: #3b82f6;
+            background-color: #f8faff;
+            transform: translateY(-3px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+        }
+        .client-logo {
+            max-height: 55px;
+            max-width: 90%;
+            width: auto;
+            height: auto;
+            object-fit: contain;
+            filter: grayscale(10%);
+            opacity: 0.8;
+            transition: all 0.4s ease;
+            margin-bottom: 0.5rem;
+        }
+        .client-card:hover .client-logo {
+            filter: grayscale(0%);
+            opacity: 1;
+            transform: scale(1.05);
+        }
+        .client-name {
+            font-size: 9px;
+            font-weight: 700;
+            text-transform: uppercase;
+            color: #4b5563;
+            line-height: 1.1;
+        }
+        .client-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(8.25rem, 1fr));
+            gap: 1.25rem;
+            align-items: stretch;
+        }
+        .client-card--text-only {
+            gap: 0.65rem;
+        }
+        .client-card-initials {
+            width: 2.75rem;
+            height: 2.75rem;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 0.85rem;
+            background: linear-gradient(180deg, #eff6ff 0%, #dbeafe 100%);
+            border: 1px solid rgba(147, 197, 253, 0.55);
+            color: #1d4ed8;
+            font-size: 0.8rem;
+            font-weight: 900;
+            letter-spacing: 0.04em;
+        }
+
+        /* Count Bubble */
+        .link-count-bubble {
+            position: absolute;
+            top: -8px;
+            right: -8px;
+            background: #2563eb;
+            color: white;
+            font-size: 9px;
+            font-weight: 900;
+            width: 22px;
+            height: 22px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 2px solid white;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            z-index: 10;
+        }
+
+        /* Typography */
+        .category-title {
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            font-weight: 800;
+            color: #1e3a8a;
+            font-size: 1rem;
+            margin-bottom: 0.5rem;
+        }
+        .category-underline {
+            width: 2rem;
+            height: 3px;
+            background-color: #2563eb;
+            margin: 0 auto 1.5rem auto;
+            border-radius: 2px;
+        }
+        .section-container {
+            padding: 2.5rem 1.5rem;
+            background-color: #FAFAFA;
+            border-radius: 1.25rem;
+            border: 1px solid #f1f5f9;
+            height: auto;
+        }
+        .category-wrapper {
+            align-items: start;
+        }
+
+        /* Modal Style */
+        #portalModal {
+            position: fixed;
+            inset: 0;
+            z-index: 1000;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            padding: 1.5rem;
+            background: rgba(15, 23, 42, 0.7);
+            backdrop-filter: blur(4px);
+        }
+        .modal-content {
+            background: white;
+            width: 100%;
+            max-width: 380px;
+            border-radius: 1rem;
+            padding: 1.5rem;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+        }
+        #portalModal.active { display: flex; }
+        .portal-btn {
+            display: block;
+            width: 100%;
+            padding: 0.875rem 1rem;
+            margin-bottom: 0.5rem;
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
+            border-radius: 0.5rem;
+            color: #1e293b;
+            font-weight: 700;
+            text-transform: uppercase;
+            font-size: 11px;
+            text-align: left;
+            transition: all 0.2s;
+        }
+        .portal-btn:hover {
+            background: #2563eb;
+            color: white;
+            border-color: #2563eb;
+        }
+
+        /* iOS-Inspired Category Picker */
+        .category-picker {
+            position: relative;
+        }
+        .category-picker-trigger {
+            position: relative;
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 0.9rem;
+            padding: 0.85rem 0.95rem 0.85rem 1rem;
+            border-radius: 1.2rem;
+            border: 1px solid rgba(148, 163, 184, 0.22);
+            appearance: none;
+            background:
+                linear-gradient(180deg, rgba(255, 255, 255, 0.92) 0%, rgba(241, 245, 249, 0.82) 100%);
+            box-shadow:
+                0 10px 30px rgba(15, 23, 42, 0.08),
+                inset 0 1px 0 rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(20px) saturate(180%);
+            -webkit-backdrop-filter: blur(20px) saturate(180%);
+            cursor: pointer;
+            text-align: left;
+            transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+        }
+        .category-picker-trigger::before {
+            content: '';
+            position: absolute;
+            inset: 1px;
+            border-radius: inherit;
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.65), rgba(255, 255, 255, 0.18));
+            opacity: 0.9;
+            pointer-events: none;
+        }
+        .category-picker-trigger:hover {
+            transform: translateY(-1px);
+            box-shadow:
+                0 14px 34px rgba(15, 23, 42, 0.12),
+                inset 0 1px 0 rgba(255, 255, 255, 0.88);
+        }
+        .category-picker.open .category-picker-trigger {
+            border-color: rgba(59, 130, 246, 0.32);
+            box-shadow:
+                0 18px 40px rgba(15, 23, 42, 0.16),
+                0 0 0 4px rgba(59, 130, 246, 0.08),
+                inset 0 1px 0 rgba(255, 255, 255, 0.92);
+        }
+        .category-picker-copy,
+        .category-picker-icon {
+            position: relative;
+            z-index: 1;
+        }
+        .category-picker-copy {
+            min-width: 0;
+            display: flex;
+            flex-direction: column;
+        }
+        .category-picker-caption {
+            font-size: 8px;
+            line-height: 1;
+            font-weight: 800;
+            letter-spacing: 0.18em;
+            text-transform: uppercase;
+            color: #183F72;
+            margin-bottom: 0.3rem;
+        }
+        .category-picker-value {
+            font-size: 14px;
+            line-height: 1.2;
+            font-weight: 700;
+            color: #0f172a;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        .category-picker-icon {
+            width: 2rem;
+            height: 2rem;
+            flex-shrink: 0;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 9999px;
+            background: rgba(255, 255, 255, 0.7);
+            border: 1px solid rgba(148, 163, 184, 0.18);
+            box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.72);
+            color: #1e3a8a;
+            transition: transform 0.25s ease, background-color 0.25s ease;
+        }
+        .category-picker.open .category-picker-icon {
+            transform: rotate(180deg);
+            background: rgba(219, 234, 254, 0.85);
+        }
+        .category-picker-menu {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: min(22rem, calc(100vw - 1.5rem));
+            padding: 0.5rem;
+            border-radius: 1.4rem;
+            border: 1px solid rgba(255, 255, 255, 0.78);
+            background: rgba(255, 255, 255, 0.7);
+            box-shadow:
+                0 24px 55px rgba(15, 23, 42, 0.18),
+                0 8px 18px rgba(15, 23, 42, 0.08);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(12px);
+            opacity: 0;
+            visibility: hidden;
+            pointer-events: none;
+            transform: translateY(-8px) scale(0.98);
+            transform-origin: top center;
+            transition: opacity 0.22s ease, transform 0.22s ease, visibility 0.22s ease;
+            z-index: 90;
+            overflow: hidden;
+        }
+        .category-picker-scroll {
+            max-height: min(26rem, 70vh);
+            overflow-y: auto;
+            overflow-x: hidden;
+            overscroll-behavior: contain;
+            scrollbar-width: thin;
+            scrollbar-color: rgba(148, 163, 184, 0.55) transparent;
+        }
+        .category-picker-scroll::-webkit-scrollbar {
+            width: 8px;
+        }
+        .category-picker-scroll::-webkit-scrollbar-thumb {
+            border-radius: 9999px;
+            background: rgba(148, 163, 184, 0.55);
+        }
+        .category-picker-menu.open {
+            opacity: 1;
+            visibility: visible;
+            pointer-events: auto;
+            transform: translateY(0) scale(1);
+        }
+        .category-picker-option {
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 0.75rem;
+            padding: 0.85rem 0.95rem;
+            border: 0;
+            border-radius: 1rem;
+            background: transparent;
+            color: #0f172a;
+            font-size: 0.92rem;
+            font-weight: 700;
+            cursor: pointer;
+            text-align: left;
+            transition: background-color 0.22s ease, transform 0.22s ease, color 0.22s ease, box-shadow 0.22s ease;
+        }
+        .category-picker-option:hover,
+        .category-picker-option:focus-visible {
+            background: rgba(59, 130, 246, 0.08);
+            color: #1d4ed8;
+            transform: translateX(3px);
+            outline: none;
+        }
+        .category-picker-option.active {
+            background: linear-gradient(135deg, rgba(219, 234, 254, 0.88), rgba(239, 246, 255, 0.92));
+            color: #1d4ed8;
+            box-shadow: inset 0 0 0 1px rgba(96, 165, 250, 0.2);
+        }
+        .category-picker-check {
+            width: 1rem;
+            height: 1rem;
+            flex-shrink: 0;
+            opacity: 0;
+            transform: scale(0.85);
+            transition: opacity 0.22s ease, transform 0.22s ease;
+        }
+        .category-picker-option.active .category-picker-check {
+            opacity: 1;
+            transform: scale(1);
+        }
+        @media (max-width: 768px) {
+            .value-card-grid {
+                grid-template-columns: 1fr;
+            }
+            .value-card--featured {
+                width: 100%;
+                text-align: left;
+            }
+            .featured-value-icon {
+                margin-left: 0;
+                margin-right: 0;
+            }
+            .logo-track-group {
+                gap: 0.75rem;
+                padding: 0.85rem 0.75rem;
+            }
+            .logo-chip {
+                min-width: 6rem;
+                height: 3.75rem;
+                padding: 0 0.3rem;
+            }
+            .logo-marquee-stage {
+                padding: 0.65rem 0;
+            }
+            .logo-marquee-stage::before,
+            .logo-marquee-stage::after {
+                width: 2.3rem;
+            }
+            .university-logo {
+                max-width: 6.9rem;
+                max-height: 4rem;
+            }
+            .logo-marquee {
+                padding: 0 2.45rem;
+            }
+            .logo-nav {
+                width: 2.2rem;
+                height: 2.2rem;
+            }
+            .logo-nav--prev {
+                left: 0;
+            }
+            .logo-nav--next {
+                right: 0;
+            }
+            .featured-value-copy {
+                white-space: normal;
+            }
+        }
+        @media (max-width: 640px) {
+            .category-picker-scroll {
+                max-height: min(22rem, 60vh);
+            }
+        }
+
+        /* Go to Top Button */
+        #goToTopBtn {
+            position: fixed;
+            right: 1.5rem;
+            bottom: 1.5rem;
+            width: 3rem;
+            height: 3rem;
+            border: none;
+            border-radius: 9999px;
+            background: #002F80;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: 0 12px 30px rgba(37, 99, 235, 0.28);
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(12px);
+            transition: opacity 0.25s ease, transform 0.25s ease, visibility 0.25s ease, box-shadow 0.25s ease;
+            z-index: 60;
+        }
+        #goToTopBtn.visible {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+        #goToTopBtn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 16px 36px rgba(30,85,138,0.55);
+        }
+        #goToTopBtn:focus-visible {
+            outline: 3px solid rgba(59, 130, 246, 0.35);
+            outline-offset: 3px;
+        }
+        @media (max-width: 640px) {
+            #goToTopBtn {
+                right: 1rem;
+                bottom: 1rem;
+                width: 2.75rem;
+                height: 2.75rem;
+            }
+        }
+    </style>
+</head>
+<body class="text-gray-900">
+
+    <!-- Header Section with Navigation Tools -->
+    <header class="bg-white/70 backdrop-blur-md border-b sticky top-0 z-50 transition-all duration-300">
+        <div class="max-w-7xl mx-auto px-6 py-4 flex flex-col md:flex-row justify-between items-center gap-4">
+            <div class="flex items-center w-full md:w-auto justify-center md:justify-start">
+                <img src="https://eduriserck.com/eduriser/eduriser-logo.svg" alt="EduRiser Logo" class="h-10 w-auto">
+            </div>
+            
+            <div class="flex flex-col sm:flex-row items-center gap-3 w-full md:w-auto">
+                <!-- Dropdown Navigation -->
+                <div id="categoryPicker" class="category-picker w-full sm:w-64">
+                    <button id="categoryPickerButton" type="button" class="category-picker-trigger" aria-haspopup="listbox" aria-expanded="false">
+                        <span class="category-picker-copy">
+                            <span class="category-picker-caption">Browse Categories</span>
+                            <span id="categoryPickerLabel" class="category-picker-value">Jump to Category</span>
+                        </span>
+                        <span class="category-picker-icon" aria-hidden="true">
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.2" d="M19 9l-7 7-7-7"></path>
+                            </svg>
+                        </span>
+                    </button>
+                    <select id="categorySelect" onchange="scrollToCategory(this.value)" class="sr-only" tabindex="-1" aria-hidden="true">
+                        <option value="">Jump to Category...</option>
+                        <option value="category-automobile">Automobile</option>
+                        <option value="category-bfsi">BFSI</option>
+                        <option value="category-chemical">Chemical</option>
+                        <option value="category-communication">Communication</option>
+                        <option value="category-custom-content">Custom Content</option>
+                        <option value="category-education">Education</option>
+                        <option value="category-fmcg">FMCG</option>
+                        <option value="category-gamification">Gamification</option>
+                        <option value="category-healthcare">Health Care</option>
+                        <option value="category-hospitality">Hospitality</option>
+                        <option value="category-manufacturing">Manufacturing & Engineering</option>
+                        <option value="category-media">Media</option>
+                        <option value="category-oil-gas">Oil & Gas</option>
+                        <option value="category-pharma">Pharma</option>
+                        <option value="category-construction">Realty</option>
+                        <option value="category-retail">Retail</option>
+                        <option value="category-supply-chain">Supply Chain</option>
+                        <option value="category-technology">Technology</option>
+                    </select>
+                </div>
+
+                <a href="https://eduriserck.com/clientele/ckfaculty/" class="w-full sm:w-auto inline-flex items-center justify-center rounded-xl bg-blue-900 px-5 py-3 text-sm font-semibold text-white shadow-sm transition-all hover:bg-blue-900 hover:outline-none hover:ring-1 hover:ring-blue-300 hover:ring-offset-2" target="_blank">
+                    CK Faculties
+                </a>
+
+                <!-- Client Search Bar -->
+                <div class="relative w-full sm:w-64">
+                    <input type="text" id="searchInput" oninput="filterClients()" placeholder="Search specific client..." class="w-full pl-10 pr-12 py-2.5 bg-gray-50 border border-gray-200 rounded-xl text-base sm:text-sm font-medium text-gray-800 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all">
+                    <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                        <svg class="w-4 h-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+                    </div>
+                    <button id="clearSearchBtn" type="button" onclick="clearClientSearch()" aria-label="Clear search" class="absolute inset-y-0 right-0 pr-3 flex items-center hidden">
+                        <span class="inline-flex h-7 w-7 items-center justify-center rounded-full border border-gray-200 bg-white text-gray-400 transition-all hover:border-gray-300 hover:text-gray-600">
+                            <svg class="h-3.5 w-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.2" d="M6 6l12 12M18 6l-12 12"></path>
+                            </svg>
+                        </span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <div id="categoryPickerMenu" class="category-picker-menu" role="presentation">
+        <div id="categoryPickerScroll" class="category-picker-scroll" role="listbox" aria-label="Category navigation"></div>
+    </div>
+
+    <!-- Hero Section -->
+    <section class="hero-banner">
+        <div class="hero-overlay"></div>
+        <div class="max-w-7xl mx-auto px-6 hero-content text-center">
+            <div class="mb-8">
+                <h2 class="hero-eyebrow font-bold tracking-[0.3em] uppercase text-sm mb-4">The CrossKnowledge Difference</h2>
+                <h1 class="hero-gradient-title text-4xl md:text-5xl font-black tracking-tight uppercase mb-4 leading-tight">
+                    Our Global Partners
+                </h1>
+                <p class="hero-subtitle text-blue-100 font-light max-w-3xl mx-auto">
+                    We collaborate with leading global institutions to bring you high-impact learning backed by research, expertise, and cutting-edge delivery.
+                </p>
+            </div>
+
+            <!-- Difference Cards -->
+            <div class="hero-value-layout">
+                <div class="value-card value-card--featured">
+                    <div class="feature-icon-wrap featured-value-icon">
+                        <svg class="feature-icon w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path></svg>
+                    </div>
+                    <h3 class="value-card-title font-black text-lg mb-2 uppercase tracking-wide">World-Class Content</h3>
+                    <p class="value-card-copy featured-value-copy mx-auto">
+                        Curated programs from top global institutions, designed to deliver practical insights and industry-relevant knowledge.
+                    </p>
+                    <div class="logo-marquee" aria-label="Featured university partners">
+                        <button id="logoNavPrev" class="logo-nav logo-nav--prev" type="button" aria-label="Scroll logos left">
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.4" d="M15 18l-6-6 6-6"></path>
+                            </svg>
+                        </button>
+                        <div id="universityLogoStage" class="logo-marquee-stage" tabindex="0">
+                            <div class="logo-track">
+                                <div class="logo-track-group" id="universityLogoTrackPrimary">
+                                    <!-- Replace only the src values below with your university logo image links. -->
+                                    <div class="logo-chip">
+                                        <img src="https://eduriserck.com/eduriser/Clientele/University-logos/Artboard%202.png" alt="University logo 2" class="university-logo" decoding="async">
+                                    </div>
+                                    <div class="logo-chip">
+                                        <img src="https://eduriserck.com/eduriser/Clientele/University-logos/Artboard%203.png" alt="University logo 3" class="university-logo" decoding="async">
+                                    </div>
+                                    <div class="logo-chip">
+                                        <img src="https://eduriserck.com/eduriser/Clientele/University-logos/Artboard%204.png" alt="University logo 4" class="university-logo" decoding="async">
+                                    </div>
+                                    <div class="logo-chip">
+                                        <img src="https://eduriserck.com/eduriser/Clientele/University-logos/Artboard%205.png" alt="University logo 5" class="university-logo" decoding="async">
+                                    </div>
+                                    <div class="logo-chip">
+                                        <img src="https://eduriserck.com/eduriser/Clientele/University-logos/Artboard%206.png" alt="University logo 6" class="university-logo" decoding="async">
+                                    </div>
+                                    <div class="logo-chip">
+                                        <img src="https://eduriserck.com/eduriser/Clientele/University-logos/Artboard%207.png" alt="University logo 7" class="university-logo" decoding="async">
+                                    </div>
+                                    <div class="logo-chip">
+                                        <img src="https://eduriserck.com/eduriser/Clientele/University-logos/Artboard%208.png" alt="University logo 8" class="university-logo" decoding="async">
+                                    </div>
+                                    <div class="logo-chip">
+                                        <img src="https://eduriserck.com/eduriser/Clientele/University-logos/Artboard%209.png" alt="University logo 9" class="university-logo" decoding="async">
+                                    </div>
+                                    <div class="logo-chip">
+                                        <img src="https://eduriserck.com/eduriser/Clientele/University-logos/Artboard%2010.png" alt="University logo 10" class="university-logo" decoding="async">
+                                    </div>
+                                    <div class="logo-chip">
+                                        <img src="https://eduriserck.com/eduriser/Clientele/University-logos/Artboard%2011.png" alt="University logo 11" class="university-logo" decoding="async">
+                                    </div>
+                                    <div class="logo-chip">
+                                        <img src="https://eduriserck.com/eduriser/Clientele/University-logos/Artboard%2012.png" alt="University logo 12" class="university-logo" decoding="async">
+                                    </div>
+                                    <div class="logo-chip">
+                                        <img src="https://eduriserck.com/eduriser/Clientele/University-logos/Artboard%2013.png" alt="University logo 13" class="university-logo" decoding="async">
+                                    </div>
+                                    <div class="logo-chip">
+                                        <img src="https://eduriserck.com/eduriser/Clientele/University-logos/Artboard%2014.png" alt="University logo 14" class="university-logo" decoding="async">
+                                    </div>
+                                    <div class="logo-chip">
+                                        <img src="https://eduriserck.com/eduriser/Clientele/University-logos/Artboard%2015.png" alt="University logo 15" class="university-logo" decoding="async">
+                                    </div>
+                                </div>
+                                <div class="logo-track-group" id="universityLogoTrackClone" aria-hidden="true"></div>
+                            </div>
+                        </div>
+                        <button id="logoNavNext" class="logo-nav logo-nav--next" type="button" aria-label="Scroll logos right">
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.4" d="M9 6l6 6-6 6"></path>
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+                <div class="value-card-grid text-left">
+                    <div class="value-card">
+                        <div class="feature-icon-wrap">
+                            <svg class="feature-icon w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
+                        </div>
+                        <h3 class="value-card-title font-black text-lg mb-2 uppercase tracking-wide">Cutting-Edge Tech</h3>
+                        <p class="value-card-copy text-sm leading-relaxed">
+                            Easier and faster to integrate technology featuring exceptional user experience and full mobile accessibility.
+                        </p>
+                    </div>
+                    <div class="value-card">
+                        <div class="feature-icon-wrap">
+                            <svg class="feature-icon w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
+                        </div>
+                        <h3 class="value-card-title font-black text-lg mb-2 uppercase tracking-wide">Superior Expertise</h3>
+                        <p class="value-card-copy text-sm leading-relaxed">
+                            A dedicated team of experts committed to delivering measurable outcomes with precision, transparency, and strategic insight.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <main id="clientResults" class="max-w-7xl mx-auto px-6 py-20">
+        
+        <div class="space-y-16">
+
+            <!-- BFSI -->
+            <div class="category-wrapper">
+                <section id="category-bfsi" class="text-center section-container">
+                    <h2 class="category-title">BFSI</h2>
+                    <div class="category-underline"></div>
+                    <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-5">
+                        <a href="https://tinyurl.com/u97xkpvz" class="client-card" target="_blank" rel="noopener noreferrer" onclick="handleClientClick('Motilal Oswal', ['Portal'])">
+                            <img src="https://eduriserck.com/eduriser/Clientele/Client-logos/Motilal.png" class="client-logo">
+                            <h4 class="client-name">Motilal Oswal</h4>
+                        </a>
+                        <a href="https://eduriser.lms.crossknowledge.com/sso/login/guest13/identity_field/login/hash/adbc5954a47429415f0f91221652b24c29033ba3" target="_blank" rel="noopener noreferrer" class="client-card" onclick="handleClientClick('Bank of Baroda', ['Portal'])">
+                            <img src="https://eduriserck.com/eduriser/Clientele/Client-logos/Bank-of-Baroda.png" class="client-logo">
+                            <h4 class="client-name">Bank of Baroda</h4>
+                        </a>
+                        <a href="https://eduriser.lms.crossknowledge.com/sso/identity_field/ref_number/ref_number/2030efb31d2f48b81371b606105662f3015e1201/hash/9b7985e7d689d2b24f579aa72ac50ba00c1aba06" target="_blank" rel="noopener noreferrer" class="client-card" onclick="handleClientClick('Mahindra Finance', ['Portal'])">
+                            <img src="https://eduriserck.com/eduriser/Clientele/Client-logos/Mahindra-finance.png" class="client-logo">
+                            <h4 class="client-name">Mahindra Finance</h4>
+                        </a>
+							 <a href="https://eduriser.lms.crossknowledge.com/sso/identity_field/ref_number/ref_number/a8a888a9c5dc8ec62b7200ee4e067c13ead86d63/hash/1046863eb7a944241a46403f380b66fa2b2a5b7a" target="_blank" rel="noopener noreferrer" class="client-card" onclick="handleClientClick('HDFC life', ['Portal'])">
+                            <img src="https://eduriserck.com/eduriser/Clientele/Client-logos/HDFC-life.png" class="client-logo">
+                            <h4 class="client-name">HDFC life</h4>
+                        </a>
+                        <a href="https://tataaig.na.crossknowledge.com/sso/login/tataaig/identity_field/login/hash/30614b14f4c15c7b3c63306274e6414a1338c79a" target="_blank" rel="noopener noreferrer" class="client-card" onclick="handleClientClick('TATA AIG', ['Portal'])">
+                            <img src="https://eduriserck.com/eduriser/Clientele/Client-logos/TATA-AIG.png" class="client-logo">
+                            <h4 class="client-name">TATA AIG</h4>
+                        </a>
+                        <a href="https://tataaig.na.crossknowledge.com/sso/login/tataaig/identity_field/login/hash/30614b14f4c15c7b3c63306274e6414a1338c79a" target="_blank" rel="noopener noreferrer" class="client-card" onclick="handleClientClick('IL&FS', ['Portal'])">
+                            <img src="https://eduriserck.com/eduriser/Clientele/Client-logos/IL&FS.png" class="client-logo">
+                            <h4 class="client-name">IL&FS</h4>
+                        </a>
+                        <a href="https://kotak.asia.crossknowledge.com/sso/login/demo2/identity_field/login/hash/43b462665214bd554b09142bb09e9cbc06eaf019" class="client-card" target="_blank" rel="noopener noreferrer" onclick="handleClientClick('Kotak Life', ['Portal'])">
+                            <img src="https://eduriserck.com/eduriser/Clientele/Client-logos/Kotak-Life.png" class="client-logo">
+                            <h4 class="client-name">Kotak Life</h4>
+                        </a>
+                        <a href="https://eduriserck.com/amits/whatsappsso.php?authtoken=btf5BrGPOhNInY84cBCSr/yf/WdA59irmQa3PKXW//kJVAeg145mmh57URs/fVzh%2BwV9i4rKLHZfK9FmFtUKY3iPUYlctlPmp5yP5yrWVYG8%2BMmnPD4Nlso6lWYXA8CbaslvZ6N2AKF5FN4xxNnLcj1AKmbgU4BVYB3uwobsi5d4CmXg64dMI%2BF8IazkS8buda/TPWwOVyXEjIE%2BkX46w%2BUmicorA4K9THKbVXv/kVYupFjp3BtiPzXnGT4eg8ptLZ85EzH8/oWPv0vAvYjjaH9uFMT4uu3dH5hquAeEJIM%3D" target="_blank" rel="noopener noreferrer" class="client-card" onclick="handleClientClick('Reliance GIC', ['Portal'])">
+                            <img src="https://eduriserck.com/eduriser/Clientele/Client-logos/Reliance-GIC.png" class="client-logo">
+                            <h4 class="client-name">Reliance GIC</h4>
+                        </a>
+                        <a href="https://tinyurl.com/y44skfda" target="_blank" rel="noopener noreferrer" class="client-card" onclick="handleClientClick('ICICI Prudential AMC', ['Portal'])">
+                            <img src="https://eduriserck.com/eduriser/Clientele/Client-logos/ICICI-Prudential-AMC.png" class="client-logo">
+                            <h4 class="client-name">ICICI Prudential AMC</h4>
+                        </a>
+                    </div>
+                </section>
+            </div>
+
+            <!-- Automobile & Chemical -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-10 category-wrapper">
+                <section id="category-automobile" class="text-center section-container">
+                    <h2 class="category-title">Automobile</h2>
+                    <div class="category-underline"></div>
+                    <div class="grid grid-cols-2 gap-5">
+                        <a href="https://eduriser.lms.crossknowledge.com/sso/identity_field/ref_number/ref_number/3a006d6b5821e3350f9a5c548c11c1338815c5af/hash/f427f514f7e921a4cfd367a3802ee60d2804cb04" target="_blank" rel="noopener noreferrer" class="client-card" onclick="handleClientClick('Mahindra & Mahindra (AFS)', ['Portal'])">
+                            <img src="https://eduriserck.com/eduriser/Clientele/Client-logos/Mahindra-&-Mahindra.png" class="client-logo">
+                            <h4 class="client-name">Mahindra & Mahindra (AFS)</h4>
+                        </a>
+                        <a href="https://tinyurl.com/4wtdbyx7" target="_blank" rel="noopener noreferrer" class="client-card" onclick="handleClientClick('Ashok Leyland', ['Portal'])">
+                            <img src="https://eduriserck.com/eduriser/Clientele/Client-logos/Ashok-Leyland.png" class="client-logo">
+                            <h4 class="client-name">Ashok Leyland</h4>
+                        </a>
+                    </div>
+                </section>
+                <section id="category-chemical" class="text-center section-container">
+                    <h2 class="category-title">Chemical</h2>
+                    <div class="category-underline"></div>
+                    <div class="grid grid-cols-2 gap-5">
+                        <a href="http://eduriser.lms.crossknowledge.com/sso/identity_field/ref_number/ref_number/6a7171e79d9afaf633d299e26a8aa32c57444867/hash/2c3043473befa09224cd2313cdd004427dfaef39" target="_blank" rel="noopener noreferrer" class="client-card" onclick="handleClientClick('KEVA', ['Portal'])">
+                            <img src="https://eduriserck.com/eduriser/Clientele/Client-logos/KEVA.png" class="client-logo">
+                            <h4 class="client-name">KEVA</h4>
+                        </a>
+                        <a href="https://www.figma.com/proto/yqS1H0h47QZaynlwVMknA9/Untitled?type=design&node-id=1-2&t=Jco5tK6bG7hpf3DA-1&scaling=min-zoom&page-id=0:1&starting-point-node-id=1:2&mode=design" target="_blank" rel="noopener noreferrer" class="client-card" onclick="handleClientClick('Bayer', ['Portal'])">
+                            <img src="https://eduriserck.com/eduriser/Clientele/Client-logos/Bayer.png" class="client-logo">
+                            <h4 class="client-name">Bayer</h4>
+                        </a>
+                    </div>
+                </section>
+            </div>
+
+            <!-- Construction & Hospitality -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-10 category-wrapper">
+                <section id="category-construction" class="text-center section-container">
+                    <h2 class="category-title">Realty</h2>
+                    <div class="category-underline"></div>
+                    <div class="grid grid-cols-2 gap-5">
+                        <a href="https://tinyurl.com/3fs69dju" target="_blank" rel="noopener noreferrer" class="client-card" onclick="handleClientClick('Godrej Properties', ['Portal'])">
+                            <img src="https://eduriserck.com/eduriser/Clientele/Client-logos/Godrej-Properties.png" class="client-logo">
+                            <h4 class="client-name">Godrej Properties</h4>
+                        </a>
+                        <a href="https://eduriserck.com/arvindrealty/index.html" target="_blank" rel="noopener noreferrer" class="client-card" onclick="handleClientClick('Arvind Realty', ['Portal'])">
+                            <img src="https://eduriserck.com/eduriser/Clientele/Client-logos/Arvind-Realty.png" class="client-logo">
+                            <h4 class="client-name">Arvind Realty</h4>
+                        </a>
+                        <a href="https://eduriserck.com/L%26TRealty/index.html" target="_blank" rel="noopener noreferrer" class="client-card" onclick="handleClientClick('L&T Construction', ['Portal'])">
+                            <img src="https://eduriserck.com/eduriser/Clientele/Client-logos/L&T.png" class="client-logo">
+                            <h4 class="client-name">L&T Construction</h4>
+                        </a>
+                        <a href="https://tinyurl.com/2nd7jhq5" target="_blank" rel="noopener noreferrer" class="client-card" onclick="handleClientClick('Dalmia', ['Portal'])">
+                            <img src="https://eduriserck.com/eduriser/Clientele/Client-logos/Dalmia.png" class="client-logo">
+                            <h4 class="client-name">Dalmia</h4>
+                        </a>
+                    </div>
+                </section>
+                <section id="category-hospitality" class="text-center section-container">
+                    <h2 class="category-title">Hospitality</h2>
+                    <div class="category-underline"></div>
+                    <div class="grid grid-cols-2 gap-5">
+							<div class="client-card" onclick="handleClientClick('IHCL', [
+								{ title: 'LEAD', url: 'https://tinyurl.com/2wxvk398' },
+								{ title: 'IDEATE', url: 'https://tinyurl.com/2bxsret2' },
+								{ title: 'Custom Content', url: 'https://tinyurl.com/yk5u25du' }
+							])">
+                            <div class="link-count-bubble">3</div>
+                            <img src="https://eduriserck.com/eduriser/Clientele/Client-logos/IHCL.png" class="client-logo">
+                            <h4 class="client-name">IHCL</h4>
+                        </div>
+                        <a href="#" target="_blank" rel="noopener noreferrer" class="client-card" onclick="handleClientClick('Ginger Hotels', ['Portal'])">
+                            <img src="https://eduriserck.com/eduriser/Clientele/Client-logos/Ginger-Hotels.png" class="client-logo">
+                            <h4 class="client-name">Ginger Hotels</h4>
+                        </a>
+                    </div>
+                </section>
+            </div>
+
+            <!-- Manufacturing & Engineering -->
+            <div class="category-wrapper">
+                <section id="category-manufacturing" class="text-center section-container">
+                    <h2 class="category-title">Manufacturing & Engineering</h2>
+                    <div class="category-underline"></div>
+                    <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-5">
+                        <a href="https://tinyurl.com/y5j7xzdx" target="_blank" rel="noopener noreferrer" class="client-card" onclick="handleClientClick('L&T', ['Portal'])">
+                            <img src="https://eduriserck.com/eduriser/Clientele/Client-logos/L&T.png" class="client-logo">
+                            <h4 class="client-name">L&T</h4>
+                        </a>
+							<div class="client-card" onclick="handleClientClick('TATA STEEL', [
+								{ title: 'TATA Steel Agile', url: 'https://eduriserck.com/amits/whatsappsso.php?authtoken=3uDDLzhxJTLcWQlTH26JtWRIKhZz6l/3UAjpfdgC7GUmSL66yoFOKMtOn3bukrsqvpmPF2vjNuoZ/wMQZxCbi6n2iWarGXo/0%2BKsz/pAS8XwpOk2W0ZdGPVIghghtsw8/7Jl55l3Xi2IC9j4qYCpYL9QA2QAPoRKISReajjF6XhOzU%2BX1PTxjY1l9YdeqLH8htFwkklqD/cuFuDQf0Xp4/zbZ8sW7fqdoWVsRD4lbOz%2Bkbza5l8/bn0E3MbW/FvKz%2BEk5BDrEo4Ua9PgJ8vJW8/cepsprntmK/fhcYBhXqo%3D' },
+								{ title: 'TATA Steel – CII ', url: 'https://tinyurl.com/y35xnzcy' },
+								{ title: 'TATA Steel CII - Program Details', url: ' https://eduriserck.com/CII/documents/Programme%20Schedule-CII_new.pdf' },
+								{ title: 'Tata Steel - HiPos', url: 'https://eduriserck.com/TataSteel/HIPOs-Journey-AspireX.html' },
+								{ title: 'MCF', url: 'https://tinyurl.com/4ds5snx9' }
+							])">
+                            <div class="link-count-bubble">5</div>
+                            <img src="https://eduriserck.com/eduriser/Clientele/Client-logos/TATA-STEEL.png" class="client-logo">
+                            <h4 class="client-name">TATA STEEL</h4>
+                        </div>
+                        <div class="client-card" onclick="handleClientClick('SIEMENS', [
+								{ title: 'Customer First', url: 'https://eduriser.lms.crossknowledge.com/sso/identity_field/ref_number/ref_number/db77a14cc4e412cbed7ef21560de34ffd484f333/hash/aa6e67af0289bcd66121f064084ccd52ae3bc189' },
+								{ title: 'Leadership', url: 'https://eduriser.lms.crossknowledge.com/sso/identity_field/ref_number/ref_number/8850f311cb102d1cfe5cfb508f5b63cc9e3532b5/hash/45d987d51e7820a31146eb7fe77d1050e9ebd4ab' }
+							])">
+						 <div class="link-count-bubble">2</div>
+                            <img src="https://eduriserck.com/eduriser/Clientele/Client-logos/SIEMENS.png" class="client-logo">
+                            <h4 class="client-name">SIEMENS</h4>
+                        </div>
+                        <a href="https://thermaxglobal.asia.crossknowledge.com/sso/login/thermax/identity_field/login/hash/4d22734112ed61a163d641de55034a7f781be849" target="_blank" rel="noopener noreferrer" class="client-card" onclick="handleClientClick('THERMAX', ['Portal'])">
+                            <img src="https://eduriserck.com/eduriser/Clientele/Client-logos/THERMAX.png" class="client-logo">
+                            <h4 class="client-name">THERMAX</h4>
+                        </a>
+                        <a href="https://eduriser.lms.crossknowledge.com/sso/identity_field/ref_number/ref_number/05403d8ebb0cc7b641638c89bca63dd8c7ca19d6/hash/cfc090fd764cb1b2f26e4000a7b862a00b340f46" target="_blank" rel="noopener noreferrer" class="client-card" onclick="handleClientClick('PRAJ INDUSTRIES', ['Portal'])">
+                            <img src="https://eduriserck.com/eduriser/Clientele/Client-logos/PRAJ-INDUSTRIES.png" class="client-logo">
+                            <h4 class="client-name">PRAJ INDUSTRIES</h4>
+                        </a>
+                        <a href="https://eduriser.lms.crossknowledge.com/sso/login/guest3555/identity_field/login/hash/b6133e4a737eaae2903f55bb33d396aac297558e" target="_blank" rel="noopener noreferrer" class="client-card" onclick="handleClientClick('LEGRAND INDIA', ['Portal'])">
+                            <img src="https://eduriserck.com/eduriser/Clientele/Client-logos/LEGRAND-INDIA.png" class="client-logo">
+                            <h4 class="client-name">LEGRAND INDIA</h4>
+                        </a>
+                        <a href="https://dcmshriram.asia.crossknowledge.com/sso/login/anonymous/identity_field/login/hash/94b80e096e8b96c7b562ec2660363f415af87e78" target="_blank" rel="noopener noreferrer" class="client-card" onclick="handleClientClick('DCM SHRIRAM', ['Portal'])">
+                            <img src="https://eduriserck.com/eduriser/Clientele/Client-logos/DCM-SHRIRAM.png" class="client-logo">
+                            <h4 class="client-name">DCM SHRIRAM</h4>
+                        </a>
+                        <a href="https://eduriser.lms.crossknowledge.com/sso/login/demo%40alfalaval.com/identity_field/login/hash/a19f9f8dec1770b917e515341b510c5ed17a15f8" target="_blank" rel="noopener noreferrer" class="client-card" onclick="handleClientClick('ALFA LAVAL', ['Portal'])">
+                            <img src="https://eduriserck.com/eduriser/Clientele/Client-logos/ALFA-LAVAL.png" class="client-logo">
+                            <h4 class="client-name">ALFA LAVAL</h4>
+                        </a>
+                        <a href="https://tinyurl.com/bddn6wze" target="_blank" rel="noopener noreferrer" class="client-card" onclick="handleClientClick('E-CON SYSTEM', ['Portal'])">
+                            <img src="https://eduriserck.com/eduriser/Clientele/Client-logos/E-CON-SYSTEM.png" class="client-logo">
+                            <h4 class="client-name">E-CON SYSTEM</h4>
+                        </a>
+                        <a href="https://tinyurl.com/bddmea6s" target="_blank" rel="noopener noreferrer" class="client-card" onclick="handleClientClick('BIOQUEST', ['Portal'])">
+                            <img src="https://eduriserck.com/eduriser/Clientele/Client-logos/BIOQUEST.png" class="client-logo">
+                            <h4 class="client-name">BIOQUEST</h4>
+                        </a>
+							<div class="client-card" onclick="handleClientClick('SUDARSHAN', [
+								{ title: 'Sudarshan Portal', url: 'https://tinyurl.com/y2fj2had' },
+								{ title: 'Sudarshan - Change Management', url: 'https://eduriserck.com/eduriser/Project-Spectrum.html' }
+							])">
+                            <div class="link-count-bubble">2</div>
+                            <img src="https://eduriserck.com/eduriser/Clientele/Client-logos/SUDARSHAN.png" class="client-logo">
+                            <h4 class="client-name">SUDARSHAN</h4>
+                        </div>
+                        <a href="https://tinyurl.com/2859o8cz" target="_blank" rel="noopener noreferrer" class="client-card" onclick="handleClientClick('Wadia Group', ['Portal'])">
+                            <img src="https://eduriserck.com/eduriser/Clientele/Client-logos/Wadia-Group.png" class="client-logo">
+                            <h4 class="client-name">Wadia Group</h4>
+                        </a>
+							<div class="client-card" onclick="handleClientClick('JINDAL STAINLESS', [
+								{ title: 'JSL Learner Orientation', url: 'https://eduriserck.com/demo-2025/clientele/JSL_Launch_2024.pptx' },
+								{ title: 'JSL Portal', url: 'https://tinyurl.com/5n8396yv' }
+							])">
+                            <div class="link-count-bubble">2</div>
+                            <img src="https://eduriserck.com/eduriser/Clientele/Client-logos/JINDAL-STAINLESS.png" class="client-logo">
+                            <h4 class="client-name">JINDAL STAINLESS</h4>
+                        </div>
+                    </div>
+                </section>
+            </div>
+
+            <!-- Communication, Education, Media -->
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-10 category-wrapper">
+                <section id="category-communication" class="text-center section-container">
+                    <h2 class="category-title">Communication</h2>
+                    <div class="category-underline"></div>
+                    <div class="grid grid-cols-1 gap-5">
+                        <a href="https://www.figma.com/proto/1tpHqWw0uzySjPnORc62Sk/TATA-COMMUNICATION?node-id=1-2&mode=design&t=UttjhA3fh51JDeEy-1
+" target="_blank" rel="noopener noreferrer" class="client-card" onclick="handleClientClick('Tata Communications', ['Portal'])">
+                            <img src="https://eduriserck.com/eduriser/Clientele/Client-logos/Tata-Communications.png" class="client-logo">
+                            <h4 class="client-name">Tata Communications</h4>
+                        </a>
+                        <a href="http://eduriser.lms.crossknowledge.com/sso/identity_field/ref_number/ref_number/1e355a03721bc549e1aa45c22cbbdeea18d040d7/hash/824aefd70ef3d951312305a157b141ec073cdc1b" target="_blank" rel="noopener noreferrer" class="client-card" onclick="handleClientClick('HUGHES', ['Portal'])">
+                            <img src="https://eduriserck.com/eduriser/Clientele/Client-logos/HUGHES.png" class="client-logo">
+                            <h4 class="client-name">HUGHES</h4>
+                        </a>
+                    </div>
+                </section>
+                <section id="category-education" class="text-center section-container">
+                    <h2 class="category-title">Education</h2>
+                    <div class="category-underline"></div>
+                    <div class="grid grid-cols-1 gap-5">
+                        <a href="http://eduriser.lms.crossknowledge.com/sso/identity_field/ref_number/ref_number/1e355a03721bc549e1aa45c22cbbdeea18d040d7/hash/824aefd70ef3d951312305a157b141ec073cdc1b" target="_blank" rel="noopener noreferrer" class="client-card" onclick="handleClientClick('TATA CLASS EDGE', ['Portal'])">
+                            <img src="https://eduriserck.com/eduriser/Clientele/Client-logos/TATA-CLASS-EDGE.png" class="client-logo">
+                            <h4 class="client-name">TATA CLASS EDGE</h4>
+                        </a>
+							<div class="client-card" onclick="handleClientClick('IMARTICUS', [
+								{ title: 'Program Overview', url: 'https://eduriserck.com/imarticus/IYLP_Orientation_session_15thNov2021.pdf' },
+								{ title: 'Learner Interface', url: 'https://tinyurl.com/33jbed2v' },
+								{ title: 'Facilitator Interface', url: 'https://tinyurl.com/y2zc5we7' }
+							])">
+                            <div class="link-count-bubble">3</div>
+                            <img src="https://eduriserck.com/eduriser/Clientele/Client-logos/IMARTICUS.png" class="client-logo">
+                            <h4 class="client-name">IMARTICUS</h4>
+                        </div>
+                    </div>
+                </section>
+                <section id="category-media" class="text-center section-container">
+                    <h2 class="category-title">Media</h2>
+                    <div class="category-underline"></div>
+                    <div class="grid grid-cols-1 gap-5">
+                        <a href="https://eduriserck.com/amits/whatsappsso.php?authtoken=6RN4atbP434LrBGthK9wDiVvku71ZDr4UVaBwIY39fC/3Hd%2B%2BcmRehVgL0lIJNqSAt2UqwtNDSgiRwW1FeWP0rZ13a2PoCHjsL4QqEvY5rCviYN2We78HMgr%2BkK//wObUBFggCGFEMOmHQXP/MvnGkM8sI08T8n289kZWmWKcv8Gr2h81GliAn1Ygx5HGyErZoUSxuO1dF98cIEDXBqpI%2BvwAqttY6Q4GkEjrHGijVstizpWgJ9NzpjGsit%2BwNAKL9hxH%2BDDCTeP4YEqNB51flcOomzGRRhZQdlp%2BfdsjRk%3D" target="_blank" rel="noopener noreferrer" class="client-card" onclick="handleClientClick('The Times Group', ['Portal'])">
+                            <img src="https://eduriserck.com/eduriser/Clientele/Client-logos/The-Times-Group.png" class="client-logo">
+                            <h4 class="client-name">The Times Group</h4>
+                        </a>
+                        <a href="https://eduriser.lms.crossknowledge.com/sso/identity_field/ref_number/ref_number/93b782d527b66d5ce0fd6a8b98a5d7b6a1bb6bd5/hash/f2b74cf70345fae54ad734c6f0253525b1911046" target="_blank" rel="noopener noreferrer" class="client-card" onclick="handleClientClick('Viacom 18', ['Portal'])">
+                            <img src="https://eduriserck.com/eduriser/Clientele/Client-logos/Viacom-18.png" class="client-logo">
+                            <h4 class="client-name">Viacom 18</h4>
+                        </a>
+                        <a href="https://eduriser.lms.crossknowledge.com/sso/identity_field/ref_number/ref_number/f3ec13e6dde422f2ce3f9b007944887632e2104a/hash/63a9118689b0f62c2a624eb84afc87627fed078e" target="_blank" rel="noopener noreferrer" class="client-card" onclick="handleClientClick('Sony Pictures Network', ['Portal'])">
+                            <img src="https://eduriserck.com/eduriser/Clientele/Client-logos/Sony-Pictures-Network.png" class="client-logo">
+                            <h4 class="client-name">Sony Pictures Network</h4>
+                        </a>
+                    </div>
+                </section>
+            </div>
+
+            <!-- FMCG & Pharma -->
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 category-wrapper">
+                <section id="category-fmcg" class="text-center section-container">
+                    <h2 class="category-title">FMCG</h2>
+                    <div class="category-underline"></div>
+                    <div class="grid grid-cols-2 gap-5">
+                        <a href="https://tinyurl.com/kyscbb8u" target="_blank" rel="noopener noreferrer" class="client-card" onclick="handleClientClick('Godrej Consumer Products', ['Portal'])">
+                            <img src="https://eduriserck.com/eduriser/Clientele/Client-logos/Godrej-Consumer-Products.png" class="client-logo">
+                            <h4 class="client-name">Godrej Consumer Products</h4>
+                        </a>
+                        <a href="https://tinyurl.com/2j7kqhba" target="_blank" rel="noopener noreferrer" class="client-card" onclick="handleClientClick('Godrej Agrovet', ['Portal'])">
+                            <img src="https://eduriserck.com/eduriser/Clientele/Client-logos/Godrej-Agrovet.png" class="client-logo">
+                            <h4 class="client-name">Godrej Agrovet</h4>
+                        </a>
+                        <a href="https://tinyurl.com/5ew8pek4" target="_blank" rel="noopener noreferrer" class="client-card" onclick="handleClientClick('Britannia', ['Portal'])">
+                            <img src="https://eduriserck.com/eduriser/Clientele/Client-logos/Britannia.png" class="client-logo">
+                            <h4 class="client-name">Britannia</h4>
+                        </a>
+                    </div>
+                </section>
+                <section id="category-pharma" class="text-center section-container">
+                    <h2 class="category-title">Pharma</h2>
+                    <div class="category-underline"></div>
+                    <div class="client-grid">
+							<div class="client-card" onclick="handleClientClick('B.BRAUN', [
+								{ title: 'Global Competency 2017', url: 'https://eduriser.lms.crossknowledge.com/sso/login/guest30/identity_field/login/hash/ffe03d8eb99b57239aa897eff48e1b4bff6ab088' },
+								{ title: 'JM1', url: 'https://eduriser.lms.crossknowledge.com/sso/identity_field/ref_number/ref_number/56dc25b8be0b8333f3541ba67b0258e6b200bff7/hash/cdc56cfdb7df24c54c50594833aaf8739af3dabc' },
+								{ title: 'JM2', url: 'https://eduriser.lms.crossknowledge.com/sso/identity_field/ref_number/ref_number/129aa2bb808b93176d0f810e5e65f4a2a173771b/hash/999d3ef683040d63c24d0a6011726cfb6b73027d' },
+								{ title: 'SM1', url: 'https://eduriser.lms.crossknowledge.com/sso/identity_field/ref_number/ref_number/af14575f3de2e804e82a3f73bb6feca12a4ebe7a/hash/dfa6707c532fbbae2215ae11004b87bc8c7d2501' },
+								{ title: 'SM2', url: 'https://eduriser.lms.crossknowledge.com/sso/identity_field/ref_number/ref_number/f19ca76c927b359927a244ae6674c9dead86083f/hash/e10733cd3829bd3e32c58d47be401e50facecf06' },
+								{ title: 'MM1', url: 'https://eduriser.lms.crossknowledge.com/sso/identity_field/ref_number/ref_number/61d8aac1631dcea594b0bec10a9463ee4ff88208/hash/dcdb6c211f33ea3139f51cef52ba2ead53862eff' },
+								{ title: 'MM2', url: 'https://eduriser.lms.crossknowledge.com/sso/identity_field/ref_number/ref_number/25627947256d8238357c0e984bd01a41b607532f/hash/0c5d36066587826799452512f1c71a43eea8cbac' },
+								{ title: 'MM3', url: 'https://eduriser.lms.crossknowledge.com/sso/identity_field/ref_number/ref_number/9c1fd3441fb4ecede6eb307e32e835b9fb83b40f/hash/4e839566f885eaa7a66b74f09686b7de1bbea7f8' }
+							])">
+                            <div class="link-count-bubble">8</div>
+                            <img src="https://eduriserck.com/eduriser/Clientele/Client-logos/B.BRAUN.png" class="client-logo">
+                            <h4 class="client-name">B.BRAUN</h4>
+                        </div>
+                        <div class="client-card" onclick="handleClientClick('GLENMARK', [
+								{ title: 'Portal', url: 'https://eduriserck.com/amits/whatsappsso.php?authtoken=63FqFbz1gVp1v8plQkSCiABkMrZsvViqICqfM%2BWWRg6I0WSE6Hie23J0qWbIcGpfLAYx7Hm3j/O5vkiTRNtFLcHzvKMTUgT9g6u2NNrakUnHAepvvr9FXIQo5dLK7dY%2BLuG44b7Yu6swxVowA%2BnbuTdnEtf8QljdGJA5XiW0gRuPvApgMrwTcOl4WfBQju5lL/cDBb13AdaSFvWee8YLH2lb18VkumQLuIygQnO%2BMD%2BKxWcotjv9aC/PfXdaTC2teziqrWZmRCg944H3iFL7EOQCojunmo3Ws02zCxUSpaA%3D' },
+								{ title: 'Sales', url: 'https://glenmark.lms.crossknowledge.com/sso/identity_field/ref_number/ref_number/7c4a8d09ca3762af61e59520943dc26494f8941b/hash/ca5ca577a40c2ee4f6ab32ed1d1c6952a835b4f4' },
+								{ title: 'Oncolofy', url: 'https://eduriser.lms.crossknowledge.com/sso/identity_field/ref_number/ref_number/6092972cbd3b5ac9a57eb7bf275d75f8778557c5/hash/5b7533a746383954785c802f6676958066f840ac' },
+								{ title: 'G-CAT', url: 'https://glenmark.lms.crossknowledge.com/sso/identity_field/ref_number/ref_number/a6a30a5dd77093439223f8ed02ce50ffd78ee329/hash/6bb6b46b6c19a8355fc1114019e8e8f6bf57284a' },
+								{ title: 'CHRONIC', url: 'https://glenmark.lms.crossknowledge.com/sso/identity_field/ref_number/ref_number/630120b5af1bff1aac6ae024c7c8fcfd1a2f3497/hash/b3ad50b509c8f03c99ef4920f8725b111c3e52ce' }
+							])">
+                            <div class="link-count-bubble">5</div>
+                            <img src="https://eduriserck.com/eduriser/Clientele/Client-logos/GLENMARK.png" class="client-logo">
+                            <h4 class="client-name">GLENMARK</h4>
+                        </div>
+                        <a href="https://eduriser.lms.crossknowledge.com/sso/login/mansingj%40eduriser.com5/identity_field/login/hash/d7be682fb310adba5ce12933ec59c16947b5d8c5" target="_blank" rel="noopener noreferrer" class="client-card" onclick="handleClientClick('ABBOTT', ['Portal'])">
+                            <img src="https://eduriserck.com/eduriser/Clientele/Client-logos/ABBOTT.png" class="client-logo">
+                            <h4 class="client-name">ABBOTT</h4>
+                        </a>
+                        <a href="https://eduriserck.com/amits/whatsappsso.php?authtoken=eFPWFnZWtLQLRL/PYZXdevVmJwsI92FuKjYK8FRjH%2BMxsI8TXjsQrQD5FfgImzTgJV5SAkvJ8QxUq6av5HiIWe/qnAxrSWQYpUgotj4xIaiJmMKSBidweOKeo4nULpmWbbVQ%2BURT7hsI3djpORPPLAyDp2lc8YuN8ufTknY30eqFg9rzjTwL7bWlkb2NJBQL5sD6IFgiDJG1zqg2v5MEu5cKbOZdGLMxfCZidmPw/1plaI5rkNg%2BexAbLDbc%2BeQO59YffJz4cDOsPJi2p7nsGthil9u4ryYqj0NZY3mNat0%3D" target="_blank" rel="noopener noreferrer" class="client-card" onclick="handleClientClick('AUROBINDO', ['Portal'])">
+                            <img src="https://eduriserck.com/eduriser/Clientele/Client-logos/AUROBINDO.png" class="client-logo">
+                            <h4 class="client-name">AUROBINDO</h4>
+                        </a>
+                        <a href="https://omniactives.asia.crossknowledge.com/sso/login/guest3285/identity_field/login/hash/4c88c8808f870dc1432b0ad62c01693a51e19666" target="_blank" rel="noopener noreferrer" class="client-card" onclick="handleClientClick('OMNI ACTIVE', ['Portal'])">
+                            <img src="https://eduriserck.com/eduriser/Clientele/Client-logos/OMNI-ACTIVE.png" class="client-logo">
+                            <h4 class="client-name">OMNI ACTIVE</h4>
+                        </a>
+                        <a href="https://eduriserck.com/amits/whatsappsso.php?authtoken=NNAyIH92fPXT%2B55eigAQU4hA5socFyk0JIsS07W1de3cv2aXeIMi00lyVP0Z27XZ1aDuEk69FWBiC3VvXBVtfZ7e2ff3CyMNoRNOULLtCw4AC7ZTiwTu5HWL7FnTZxLUdlmp%2BCAyGbJ4QVNmEj1Q1L8dBAULxr%2BlcHv/uBi9moBwxIwGTBngBoXbstw5ESthBmuzqbKUgbVefNjv4b4TnA6UXAVX8tQewJhQzwrLAoVSuQf8cGBePMAX9xPZ3vjc5AtkBNpkEuEhCj5Ha5p%2Bq%2Bb6q2XgPcIm%2BbCIOXlSW00%3D" target="_blank" rel="noopener noreferrer" class="client-card" onclick="handleClientClick('HETERO DRUGS', ['Portal'])">
+                            <img src="https://eduriserck.com/eduriser/Clientele/Client-logos/HETERO-DRUGS.png" class="client-logo">
+                            <h4 class="client-name">HETERO DRUGS</h4>
+                        </a>
+                        <a href="https://eduriser.lms.crossknowledge.com/sso/login/demo%40drreddy.com/identity_field/login/hash/e5d4e2e95636e0b8676368e2adf28cb78cbdebbd" target="_blank" rel="noopener noreferrer" class="client-card" onclick="handleClientClick('DR. REDDYS', ['Portal'])">
+                            <img src="https://eduriserck.com/eduriser/Clientele/Client-logos/DR.-REDDYS.png" class="client-logo">
+                            <h4 class="client-name">DR. REDDY'S</h4>
+                        </a>
+                        <a href="https://eduriserck.com/amits/whatsappsso.php?authtoken=btf5BrGPOhNInY84cBCSr/yf/WdA59irmQa3PKXW//kJVAeg145mmh57URs/fVzhd6D42v6eYaZjxXQNScf0Yxizc/IMctI4m12Cxs1gI1j31WTzGjAfV5h3TrCPezyBmjeHLkPnVSLo%2Bu1uwJU/MefmaMBVZnHlMiJUTCot6yLjrF3jnDai/hT%2B9Zmi53PKLjQWq/gRPw00/ucIToDyUvHZzGO7TScFcr4KR2/IM5cjRwHErX3ia/DNJtf6H/42pdcR8Kq70BN2rzlkBpOPKn%2BYtPX5%2Br2jBnqYPrjwmfE%3D" target="_blank" rel="noopener noreferrer" class="client-card" onclick="handleClientClick('STELIS BIOPHARMA', ['Portal'])">
+                            <img src="https://eduriserck.com/eduriser/Clientele/Client-logos/STELIS-BIOPHARMA.png" class="client-logo">
+                            <h4 class="client-name">STELIS BIOPHARMA</h4>
+                        </a>
+                        <a href="https://tinyurl.com/ykrjnm33" target="_blank" rel="noopener noreferrer" class="client-card" onclick="handleClientClick('EMCURE', ['Portal'])">
+                            <img src="https://eduriserck.com/eduriser/Clientele/Client-logos/EMCURE.png" class="client-logo">
+                            <h4 class="client-name">EMCURE</h4>
+                        </a>
+                        <a href="https://tinyurl.com/36rwwnfh" target="_blank" rel="noopener noreferrer" class="client-card client-card--text-only" onclick="handleClientClick('Tabuk Pharmaceuticals', ['Portal'])">
+                            <img src="https://eduriserck.com/eduriser/Clientele/Client-logos/Tabuk-Pharmaceuticals.png" class="client-logo">
+                            <h4 class="client-name">Tabuk Pharmaceuticals</h4>
+                        </a>
+                        <a href="https://tinyurl.com/y23v4etp" target="_blank" rel="noopener noreferrer" class="client-card client-card--text-only" onclick="handleClientClick('Kashiv BioSciences', ['Portal'])">
+                            <img src="https://eduriserck.com/eduriser/Clientele/Client-logos/Kashiv-BioSciences.png" class="client-logo">
+                            <h4 class="client-name">Kashiv BioSciences</h4>
+                        </a>
+						
+                    </div>
+                </section>
+            </div>
+
+            <!-- Retail & Technology -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-10 category-wrapper">
+                <section id="category-retail" class="text-center section-container">
+                    <h2 class="category-title">Retail</h2>
+                    <div class="category-underline"></div>
+                    <div class="client-grid">
+                        <a href="https://shoppersstop.na.crossknowledge.com/sso/login/demo2/identity_field/login/hash/123548a0584a776336b0ec92fb54613336c5bf0e" target="_blank" rel="noopener noreferrer" class="client-card" onclick="handleClientClick('Shoppers Stop', ['Portal'])">
+                            <img src="https://eduriserck.com/eduriser/Clientele/Client-logos/Shopper-stop.png" class="client-logo">
+                            <h4 class="client-name">Shoppers Stop</h4>
+                        </a>
+                        <a href="https://arvind.na.crossknowledge.com/sso/login/arvind/identity_field/login/hash/61c154ed01a002d2f0a5dbc0fd69e842a52ee1a6" target="_blank" rel="noopener noreferrer" class="client-card" onclick="handleClientClick('Arvind Lifestyle', ['Portal'])">
+                            <img src="https://eduriserck.com/eduriser/Clientele/Client-logos/Arvind-Lifestyle.png" class="client-logo">
+                            <h4 class="client-name">Arvind Lifestyle</h4>
+                        </a>
+                        <a href="https://eduriserck.com/amits/whatsappsso.php?authtoken=geY4GUcP%2B%2Be2cIutgdaX5IJn/P8ZCU972sP93skOtENkoPzRVsl0/wX%2B6cslas9XQta3r2rZvNEZO6KzOH0wYqCcWppkyxUKS%2BmwYiqiXpaYjS5ypNydA%2BAzFCopPjv0PrpAiRI8ERCfttu/S0c/lPJ2d%2B418hFx2MVKrOXtle6ELBv441UOXZtPTizC98zrNacFwz57aHjTpt0SVMrmIYuRZfXDVncjNFL9XXTRzNxQYUNZo62KV1UKS6igQ3aoUKdQhEaHZlmxvH/Hlq7niCDnvKhc7t5wnR4YJ5DdAOc%3D" target="_blank" rel="noopener noreferrer" class="client-card" onclick="handleClientClick('Walkaroo', ['Portal'])">
+                            <img src="https://eduriserck.com/eduriser/Clientele/Client-logos/Walkaroo.png" class="client-logo">
+                            <h4 class="client-name">Walkaroo</h4>
+                        </a>
+						<a href="https://eduriserck.com/amits/whatsappsso.php?authtoken=geY4GUcP%2B%2Be2cIutgdaX5IJn/P8ZCU972sP93skOtENkoPzRVsl0/wX%2B6cslas9XQta3r2rZvNEZO6KzOH0wYqCcWppkyxUKS%2BmwYiqiXpaYjS5ypNydA%2BAzFCopPjv0PrpAiRI8ERCfttu/S0c/lPJ2d%2B418hFx2MVKrOXtle6ELBv441UOXZtPTizC98zrNacFwz57aHjTpt0SVMrmIYuRZfXDVncjNFL9XXTRzNxQYUNZo62KV1UKS6igQ3aoUKdQhEaHZlmxvH/Hlq7niCDnvKhc7t5wnR4YJ5DdAOc%3D" target="_blank" rel="noopener noreferrer" class="client-card" onclick="handleClientClick('Lifestyle', ['Portal'])">
+                            <img src="https://eduriserck.com/eduriser/Clientele/Client-logos/Lifestyle.png" class="client-logo">
+                            <h4 class="client-name">Lifestyle</h4>
+                        </a>
+                        <a href="https://tinyurl.com/bdz9b5vp" target="_blank" rel="noopener noreferrer" class="client-card client-card--text-only" onclick="handleClientClick('Vedant Fashions Limited', ['Portal'])">
+                            <img src="https://eduriserck.com/eduriser/Clientele/Client-logos/Vedant-Fashions.png" class="client-logo">
+                            <h4 class="client-name">Vedant Fashions Limited</h4>
+                        </a>
+                    </div>
+                </section>
+                <section id="category-technology" class="text-center section-container">
+                    <h2 class="category-title">Technology</h2>
+                    <div class="category-underline"></div>
+                    <div class="grid grid-cols-2 gap-5">
+                        <a href="https://eduriser.lms.crossknowledge.com/sso/identity_field/ref_number/ref_number/eaa02e15ca4f05fab809684daa1af774ce9692de/hash/c10e0237cad645e598cf038660fe1029890dc95e" target="_blank" rel="noopener noreferrer" class="client-card" onclick="handleClientClick('Capita', ['Portal'])">
+                            <img src="https://eduriserck.com/eduriser/Clientele/Client-logos/Capita.png" class="client-logo">
+                            <h4 class="client-name">Capita</h4>
+                        </a>
+                        <a href="https://eduriser.lms.crossknowledge.com/sso/identity_field/ref_number/ref_number/480494482d444f56f7705b4575929da3a1ae922c/hash/e5ad939362937255d9a84707a581d763e277d279" target="_blank" rel="noopener noreferrer" class="client-card" onclick="handleClientClick('Mindtree', ['Portal'])">
+                            <img src="https://eduriserck.com/eduriser/Clientele/Client-logos/Mindtree.png" class="client-logo">
+                            <h4 class="client-name">Mindtree</h4>
+                        </a>
+                        <a href="#" target="_blank" rel="noopener noreferrer" class="client-card" onclick="handleClientClick('Capgemini', ['Portal'])">
+                            <img src="https://eduriserck.com/eduriser/Clientele/Client-logos/Capgemini.png" class="client-logo">
+                            <h4 class="client-name">Capgemini</h4>
+                        </a>
+                        <a href="https://tinyurl.com/23ccfx9k" target="_blank" rel="noopener noreferrer" class="client-card" onclick="handleClientClick('Infosys', ['Portal'])">
+                            <img src="https://eduriserck.com/eduriser/Clientele/Client-logos/Infosys.png" class="client-logo">
+                            <h4 class="client-name">Infosys</h4>
+                        </a>
+                        <a href="https://eduriser.lms.crossknowledge.com/sso/identity_field/ref_number/ref_number/976cb675b56b810432064ea1fe1198a0af3d5d34/hash/6ac1f4b8bafd5a2912cf1c16b5726f928550afd5" target="_blank" rel="noopener noreferrer" class="client-card" onclick="handleClientClick('Brillio', ['Portal'])">
+                            <img src="https://eduriserck.com/eduriser/Clientele/Client-logos/Brillio.png" class="client-logo">
+                            <h4 class="client-name">Brillio</h4>
+                        </a>
+                        <a href="https://eduriserck.com/amits/whatsappsso.php?authtoken=btf5BrGPOhNInY84cBCSr/yf/WdA59irmQa3PKXW//kJVAeg145mmh57URs/fVzh3t2YoeuHupzIG4DdFzwGiDfa23PtEYleItJow4MuSqKZOQEQSzZ4eypReAy5aH9RsALG11zUwVBmjMTKHgudHUpku9I98tEUiX2RnIdZWtY4V8Pa2FJaM8Vd72o96CkgUnnFGMDlXLgkFzUdWKdoaVTejKxP92GsTrnp0%2BeRCGgguu/Xyxys3dEBuvLRa0BCpNoFGr3gCSnAzoDBicBO4SXahhKzbCoq9a784vLbXXU%3D" target="_blank" rel="noopener noreferrer" class="client-card" onclick="handleClientClick('Sasken Technologies', ['Portal'])">
+                            <img src="https://eduriserck.com/eduriser/Clientele/Client-logos/Sasken-Technologies.png" class="client-logo">
+                            <h4 class="client-name">Sasken Technologies</h4>
+                        </a>
+                    </div>
+                </section>
+            </div>
+
+            <!-- Oil & Gas, Supply Chain, Healthcare, Gamification -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 category-wrapper">
+                <section id="category-oil-gas" class="text-center section-container">
+                    <h2 class="category-title text-base">Oil & Gas</h2>
+                    <div class="category-underline mb-4"></div>
+                    <div class="grid grid-cols-1 gap-5">
+                        <div class="client-card" onclick="handleClientClick('Gulf Oil', [
+								{ title: 'Portal', url: 'https://gulfoil.asia.crossknowledge.com/sso/login/guest1/identity_field/login/hash/df02200a47d2e84d62cc34732e05a129d2bd59b0' },
+								{ title: 'Carstop Program', url: 'https://tinyurl.com/27z4ul4j' }
+							])">
+                            <div class="link-count-bubble">2</div>
+                            <img src="https://eduriserck.com/eduriser/Clientele/Client-logos/Gulf-Oil.png" class="client-logo">
+                            <h4 class="client-name">Gulf Oil</h4>
+                        </div>
+                        <div class="client-card" onclick="handleClientClick('GCF', [
+								{ title: 'Learner 1', url: 'https://tinyurl.com/2822xojl' },
+								{ title: 'Learner 2', url: 'https://tinyurl.com/2bg7rbfl' },
+								{ title: 'Learner 3', url: 'https://tinyurl.com/2y6ndhrl' },
+								{ title: 'Learner 4', url: ' https://tinyurl.com/2ya4jbeh' }
+							])">
+							<div class="link-count-bubble">4</div>
+                            <img src="https://eduriserck.com/eduriser/Clientele/Client-logos/GCF.png" class="client-logo">
+                            <h4 class="client-name">Global Competency Framework</h4>
+                        </div>
+                    </div>
+                </section>
+                <section id="category-supply-chain" class="text-center section-container">
+                    <h2 class="category-title text-base">Supply Chain</h2>
+                    <div class="category-underline mb-4"></div>
+                    <div class="grid grid-cols-1 gap-5">
+                        <a href="https://tinyurl.com/2ypbf3zu" target="_blank" rel="noopener noreferrer" class="client-card" onclick="handleClientClick('JM Baxi', ['Portal'])">
+                            <img src="https://eduriserck.com/eduriser/Clientele/Client-logos/JM-Baxi.png" class="client-logo">
+                            <h4 class="client-name">JM Baxi</h4>
+                        </a>
+                        <a href="https://tinyurl.com/2ypbf3zu" target="_blank" rel="noopener noreferrer" class="client-card" onclick="handleClientClick('Arya Offshore', ['Portal'])">
+                            <img src="https://eduriserck.com/eduriser/Clientele/Client-logos/Arya-Offshore.png" class="client-logo">
+                            <h4 class="client-name">Arya Offshore</h4>
+                        </a>
+                    </div>
+                </section>
+                <section id="category-healthcare" class="text-center section-container">
+                    <h2 class="category-title text-base">Healthcare</h2>
+                    <div class="category-underline mb-4"></div>
+                    <a href="https://tinyurl.com/36rpmmav" target="_blank" rel="noopener noreferrer" class="client-card" onclick="handleClientClick('Vidal Health', ['Portal'])">
+                        <img src="https://eduriserck.com/eduriser/Clientele/Client-logos/Vidal-Health.png" class="client-logo">
+                        <h4 class="client-name">Vidal Health</h4>
+                    </a>
+                </section>
+                <section id="category-gamification" class="text-center section-container">
+                    <h2 class="category-title text-base">Gamification</h2>
+                    <div class="category-underline mb-4"></div>
+                    <div class="grid grid-cols-1 gap-5">
+                        <a href="https://tinyurl.com/3tn84caw" target="_blank" rel="noopener noreferrer" class="client-card" onclick="handleClientClick('Win Induction', ['Portal'])">
+                            <img src="https://eduriserck.com/eduriser/Clientele/Client-logos/TATA-AIG.png" class="client-logo">
+                            <h4 class="client-name">Win Induction</h4>
+                        </a>
+                        <a href="https://eduriserck.com/amits/whatsappsso.php?authtoken=8agAkBUeRyxioEGqpKweKF8I82/mmsv5DEZm0vAHVqybQnU6flqABc0kBIxlOQDWFu57BzGyJlWhEjEX6R9%2BSivfWsLuXA1eee6wWUP7kxjRrZKAMXvYC/Ultr%2BDhrkJ0tAv6jyl2om8XpsymMepdNoaJy31uH5uohmw8zinaLmr08Y2FBElkYTlGKcx49f0wsbrwrlyHjbbXdnGxDgVR1tFu%2Bu3DS0zuXoTm%2BUcQdx4Xcmt35egHU317XVmh%2B745RzRDmJAY8fo3TvFuaIVLV4BVycI0kUbB1WrK0WDEQ8%3D" target="_blank" rel="noopener noreferrer" class="client-card" onclick="handleClientClick('Style – HIPOS Journey', ['Portal'])">
+                            <img src="https://eduriserck.com/eduriser/Clientele/Client-logos/Shopper-stop.png" class="client-logo">
+                            <h4 class="client-name">Style – HIPOS Journey</h4>
+                        </a>
+                    </div>
+                </section>
+            </div>
+
+            <!-- Custom Content -->
+            <div class="category-wrapper">
+                <section id="category-custom-content" class="text-center section-container bg-blue-50/50 border-blue-100">
+                    <h2 class="category-title">Custom Content</h2>
+                    <div class="category-underline"></div>
+                   <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-4 gap-5">
+                        <a href="https://eduriser.lms.crossknowledge.com/sso/login/guest3448/identity_field/login/hash/b6bc6aca3c1270865b78f70c554305cb83a6adf6" target="_blank" rel="noopener noreferrer" class="client-card" onclick="handleClientClick('Style – HIPOS Journey', ['Portal'])">
+                            <img src="https://eduriserck.com/eduriser/Clientele/Client-logos/ELA.png" class="client-logo">
+                            <h4 class="client-name">ELA</h4>
+                        </a>
+					   <a href="https://tinyurl.com/377xxnxy" target="_blank" rel="noopener noreferrer" class="client-card" onclick="handleClientClick('Style – HIPOS Journey', ['Portal'])">
+                            <img src="https://eduriserck.com/eduriser/Clientele/Client-logos/Sleep-company.png" class="client-logo">
+                            <h4 class="client-name">Sleep Company</h4>
+                        </a>
+					   <a href="https://tinyurl.com/mvbw68sc" target="_blank" rel="noopener noreferrer" class="client-card" onclick="handleClientClick('Style – HIPOS Journey', ['Portal'])">
+                            <img src="https://eduriserck.com/eduriser/Clientele/Client-logos/Taj-Sats.png" class="client-logo">
+                            <h4 class="client-name">TAJ Sats</h4>
+                        </a>
+					   <a href="https://tinyurl.com/yk5u25du" target="_blank" rel="noopener noreferrer" class="client-card" onclick="handleClientClick('Style – HIPOS Journey', ['Portal'])">
+                            <img src="https://eduriserck.com/eduriser/Clientele/Client-logos/IHCL.png" class="client-logo">
+                            <h4 class="client-name">IHCL - Types of Rooms</h4>
+                        </a>
+						
+                    </div>
+                </section>
+            </div>
+            
+        </div>
+
+        <div id="noResultsMessage" class="hidden text-center py-16">
+            <div class="inline-flex items-center justify-center w-16 h-16 rounded-full bg-gray-100 mb-4">
+                <svg class="w-8 h-8 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+                </svg>
+            </div>
+            <h3 class="text-2xl font-black text-gray-900 tracking-[0.2em] uppercase mb-2">NO RESULT FOUND</h3>
+            <p class="text-sm font-medium text-gray-500 uppercase tracking-[0.14em]">Please try another client name.</p>
+        </div>
+    </main>
+
+    <!-- Modal for Multi-Link -->
+    <div id="portalModal">
+        <div class="modal-content">
+            <div class="flex justify-between items-center mb-6 border-b pb-4">
+                <h3 id="modalClientName" class="font-black text-slate-800 uppercase text-xs tracking-widest">Select Portal</h3>
+                <button onclick="closeModal()" class="text-slate-400 hover:text-slate-900 text-2xl leading-none">&times;</button>
+            </div>
+            <div id="portalLinkContainer"></div>
+        </div>
+    </div>
+
+    <button id="goToTopBtn" type="button" aria-label="Go to top" title="Go to top">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 15l7-7 7 7"></path>
+        </svg>
+    </button>
+
+    <footer class="bg-gray-50 border-t py-16">
+        <div class="max-w-7xl mx-auto px-4 text-center">
+            <div class="flex items-center justify-center space-x-2 mb-8 opacity-50">
+                <img src="https://eduriserck.com/eduriser/eduriser-logo.svg" alt="EduRiser Logo" class="h-8 w-auto">
+            </div>
+            <p class="text-gray-400 text-[10px] font-bold uppercase tracking-widest mb-6">&copy; 2026 Eduriser Digital Solutions.</p>
+        </div>
+    </footer>
+
+    <script>
+        const modal = document.getElementById('portalModal');
+        const modalName = document.getElementById('modalClientName');
+        const linkContainer = document.getElementById('portalLinkContainer');
+        const categoryPicker = document.getElementById('categoryPicker');
+        const categoryPickerButton = document.getElementById('categoryPickerButton');
+        const categoryPickerMenu = document.getElementById('categoryPickerMenu');
+        const categoryPickerScroll = document.getElementById('categoryPickerScroll');
+        const categoryPickerLabel = document.getElementById('categoryPickerLabel');
+        const categorySelect = document.getElementById('categorySelect');
+        const searchInput = document.getElementById('searchInput');
+        const clearSearchBtn = document.getElementById('clearSearchBtn');
+        const clientResults = document.getElementById('clientResults');
+        const goToTopBtn = document.getElementById('goToTopBtn');
+        const noResultsMessage = document.getElementById('noResultsMessage');
+        const universityLogoStage = document.getElementById('universityLogoStage');
+        const universityLogoTrackPrimary = document.getElementById('universityLogoTrackPrimary');
+        const universityLogoTrackClone = document.getElementById('universityLogoTrackClone');
+        const universityLogoTrack = universityLogoStage?.querySelector('.logo-track');
+        const logoNavPrev = document.getElementById('logoNavPrev');
+        const logoNavNext = document.getElementById('logoNavNext');
+        let universityLogoLeadingClone = null;
+        let universityLogoGroupWidth = 0;
+        let universityLogoAnimationFrame = 0;
+        let universityLogoLastTimestamp = 0;
+        let universityLogoDragging = false;
+        let universityLogoPointerId = null;
+        let universityLogoDragStartX = 0;
+        let universityLogoDragStartScrollLeft = 0;
+        let universityLogoAutoPausedUntil = 0;
+
+        function positionCategoryPickerMenu() {
+            if (!categoryPickerButton || !categoryPickerMenu) return;
+
+            const rect = categoryPickerButton.getBoundingClientRect();
+            const viewportPadding = 12;
+            const minimumTopOffset = 100;
+            const desiredWidth = rect.width;
+            const maxWidth = window.innerWidth - (viewportPadding * 2);
+            const menuWidth = Math.min(desiredWidth, maxWidth);
+            const left = Math.min(Math.max(rect.left, viewportPadding), window.innerWidth - menuWidth - viewportPadding);
+            const top = Math.max(rect.bottom + 12, minimumTopOffset);
+
+            categoryPickerMenu.style.width = `${menuWidth}px`;
+            categoryPickerMenu.style.left = `${left}px`;
+            categoryPickerMenu.style.top = `${top}px`;
+        }
+
+        function setCategoryPickerOpen(isOpen) {
+            if (!categoryPicker || !categoryPickerButton) return;
+
+            categoryPicker.classList.toggle('open', isOpen);
+            categoryPickerButton.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+
+            if (categoryPickerMenu) {
+                categoryPickerMenu.classList.toggle('open', isOpen);
+                if (isOpen) {
+                    positionCategoryPickerMenu();
+                }
+            }
+        }
+
+        function updateCategoryPickerLabel(categoryId = '') {
+            if (!categoryPickerLabel || !categorySelect) return;
+
+            const selectedOption = Array.from(categorySelect.options).find(option => option.value === categoryId);
+            categoryPickerLabel.textContent = selectedOption && selectedOption.value ? selectedOption.textContent : 'Jump to Category';
+        }
+
+        function syncCategoryPickerSelection() {
+            if (!categoryPickerScroll || !categorySelect) return;
+
+            const currentValue = categorySelect.value;
+
+            Array.from(categoryPickerScroll.querySelectorAll('.category-picker-option')).forEach(optionButton => {
+                const isActive = optionButton.dataset.value === currentValue;
+                optionButton.classList.toggle('active', isActive);
+                optionButton.setAttribute('aria-selected', isActive ? 'true' : 'false');
+            });
+        }
+
+        function buildCategoryPickerOptions() {
+            if (!categoryPickerScroll || !categorySelect) return;
+
+            const svgNamespace = 'http://www.w3.org/2000/svg';
+            categoryPickerScroll.innerHTML = '';
+
+            Array.from(categorySelect.options)
+                .filter(option => option.value)
+                .forEach(option => {
+                    const optionButton = document.createElement('button');
+                    const optionLabel = document.createElement('span');
+                    const checkIcon = document.createElementNS(svgNamespace, 'svg');
+                    const checkPath = document.createElementNS(svgNamespace, 'path');
+
+                    optionButton.type = 'button';
+                    optionButton.className = 'category-picker-option';
+                    optionButton.dataset.value = option.value;
+                    optionButton.setAttribute('role', 'option');
+                    optionButton.setAttribute('aria-selected', 'false');
+
+                    optionLabel.textContent = option.textContent;
+                    optionButton.appendChild(optionLabel);
+
+                    checkIcon.setAttribute('class', 'category-picker-check');
+                    checkIcon.setAttribute('fill', 'none');
+                    checkIcon.setAttribute('stroke', 'currentColor');
+                    checkIcon.setAttribute('viewBox', '0 0 24 24');
+                    checkIcon.setAttribute('aria-hidden', 'true');
+
+                    checkPath.setAttribute('stroke-linecap', 'round');
+                    checkPath.setAttribute('stroke-linejoin', 'round');
+                    checkPath.setAttribute('stroke-width', '2.5');
+                    checkPath.setAttribute('d', 'M5 13l4 4L19 7');
+                    checkIcon.appendChild(checkPath);
+
+                    optionButton.appendChild(checkIcon);
+                    optionButton.addEventListener('click', () => {
+                        setCategoryPickerOpen(false);
+                        scrollToCategory(option.value);
+                    });
+
+                    categoryPickerScroll.appendChild(optionButton);
+                });
+
+            updateCategoryPickerLabel(categorySelect.value);
+            syncCategoryPickerSelection();
+        }
+
+        function pauseUniversityLogoAutoScroll(duration = 3200) {
+            universityLogoAutoPausedUntil = performance.now() + duration;
+        }
+
+        function syncUniversityLogoSlider(resetPosition = true) {
+            if (!universityLogoTrackPrimary || !universityLogoTrackClone || !universityLogoTrack || !universityLogoStage) return;
+
+            universityLogoTrackClone.innerHTML = universityLogoTrackPrimary.innerHTML;
+
+            if (!universityLogoLeadingClone) {
+                universityLogoLeadingClone = universityLogoTrackPrimary.cloneNode(true);
+                universityLogoLeadingClone.removeAttribute('id');
+                universityLogoLeadingClone.setAttribute('aria-hidden', 'true');
+                universityLogoTrack.insertBefore(universityLogoLeadingClone, universityLogoTrackPrimary);
+            } else {
+                universityLogoLeadingClone.innerHTML = universityLogoTrackPrimary.innerHTML;
+            }
+
+            requestAnimationFrame(() => {
+                universityLogoGroupWidth = universityLogoTrackPrimary.getBoundingClientRect().width;
+
+                if (resetPosition && universityLogoGroupWidth > 0) {
+                    universityLogoStage.scrollLeft = universityLogoGroupWidth;
+                }
+            });
+        }
+
+        function normalizeUniversityLogoScroll() {
+            if (!universityLogoStage || !universityLogoGroupWidth) return;
+
+            if (universityLogoStage.scrollLeft <= 0) {
+                universityLogoStage.scrollLeft += universityLogoGroupWidth;
+            } else if (universityLogoStage.scrollLeft >= universityLogoGroupWidth * 2) {
+                universityLogoStage.scrollLeft -= universityLogoGroupWidth;
+            }
+        }
+
+        function animateUniversityLogoSlider(timestamp) {
+            if (!universityLogoStage) return;
+
+            if (!universityLogoLastTimestamp) {
+                universityLogoLastTimestamp = timestamp;
+            }
+
+            const delta = timestamp - universityLogoLastTimestamp;
+            universityLogoLastTimestamp = timestamp;
+
+            if (
+                universityLogoGroupWidth > 0 &&
+                !universityLogoDragging &&
+                timestamp > universityLogoAutoPausedUntil &&
+                document.visibilityState === 'visible'
+            ) {
+                universityLogoStage.scrollLeft += delta * 0.035;
+                normalizeUniversityLogoScroll();
+            }
+
+            universityLogoAnimationFrame = window.requestAnimationFrame(animateUniversityLogoSlider);
+        }
+
+        function scrollUniversityLogos(direction) {
+            if (!universityLogoStage) return;
+
+            pauseUniversityLogoAutoScroll(4200);
+            const distance = Math.max(universityLogoStage.clientWidth * 0.45, 180) * direction;
+            universityLogoStage.scrollBy({ left: distance, behavior: 'smooth' });
+            window.setTimeout(normalizeUniversityLogoScroll, 450);
+        }
+
+        function startUniversityLogoDrag(event) {
+            if (!universityLogoStage) return;
+            if (event.pointerType === 'mouse' && event.button !== 0) return;
+
+            universityLogoDragging = true;
+            universityLogoPointerId = event.pointerId;
+            universityLogoDragStartX = event.clientX;
+            universityLogoDragStartScrollLeft = universityLogoStage.scrollLeft;
+            universityLogoStage.classList.add('is-dragging');
+            pauseUniversityLogoAutoScroll(5000);
+            universityLogoStage.setPointerCapture?.(event.pointerId);
+        }
+
+        function moveUniversityLogoDrag(event) {
+            if (!universityLogoDragging || !universityLogoStage) return;
+            if (universityLogoPointerId !== null && event.pointerId !== universityLogoPointerId) return;
+
+            const deltaX = event.clientX - universityLogoDragStartX;
+            universityLogoStage.scrollLeft = universityLogoDragStartScrollLeft - deltaX;
+            normalizeUniversityLogoScroll();
+            event.preventDefault();
+        }
+
+        function endUniversityLogoDrag(event) {
+            if (!universityLogoDragging || !universityLogoStage) return;
+            if (event && universityLogoPointerId !== null && event.pointerId !== universityLogoPointerId) return;
+
+            universityLogoDragging = false;
+            universityLogoPointerId = null;
+            universityLogoStage.classList.remove('is-dragging');
+            window.setTimeout(normalizeUniversityLogoScroll, 40);
+        }
+
+        // Navigation Dropdown
+        function scrollToCategory(categoryId) {
+            if (categorySelect) {
+                categorySelect.value = categoryId || '';
+            }
+            updateCategoryPickerLabel(categoryId || '');
+            syncCategoryPickerSelection();
+            setCategoryPickerOpen(false);
+
+            if (!categoryId) return;
+            
+            // Clear search if using dropdown
+            const searchInput = document.getElementById('searchInput');
+            if(searchInput.value !== "") {
+                searchInput.value = "";
+                filterClients(); // Reset filter
+            }
+
+            const element = document.getElementById(categoryId);
+            if (element) {
+                // Adjusting header offset so the sticky header doesn't cover the title
+                const headerOffset = 100; 
+                const elementPosition = element.getBoundingClientRect().top;
+                const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+
+                window.scrollTo({
+                     top: offsetPosition,
+                     behavior: "smooth"
+                });
+            }
+        }
+
+        function getHeaderOffset() {
+            const header = document.querySelector('header');
+            return (header ? header.offsetHeight : 84) + 20;
+        }
+
+        function bringSearchResultsIntoView(hasResults) {
+            const searchTerm = searchInput?.value.trim();
+            if (!searchTerm) return;
+
+            const target = hasResults
+                ? document.querySelector('.section-container:not(.hidden)')
+                : noResultsMessage || clientResults;
+
+            if (!target) return;
+
+            const headerOffset = getHeaderOffset();
+            const rect = target.getBoundingClientRect();
+            const isAlreadyVisible = rect.top >= headerOffset && rect.top <= window.innerHeight * 0.45;
+
+            if (!isAlreadyVisible) {
+                const offsetPosition = rect.top + window.pageYOffset - headerOffset;
+                window.scrollTo({
+                    top: Math.max(offsetPosition, 0),
+                    behavior: 'smooth'
+                });
+            }
+        }
+
+        function updateSearchClearButton() {
+            if (!searchInput || !clearSearchBtn) return;
+
+            clearSearchBtn.classList.toggle('hidden', searchInput.value.trim() === '');
+        }
+
+        function clearClientSearch() {
+            if (!searchInput) return;
+
+            searchInput.value = '';
+            filterClients();
+            updateSearchClearButton();
+            searchInput.focus();
+        }
+
+        // Live Search Filtering
+        function filterClients() {
+            const searchTerm = searchInput.value.toLowerCase();
+            const sections = document.querySelectorAll('.section-container');
+            let visibleCardCount = 0;
+            
+            // Filter standard cards
+            sections.forEach(section => {
+                const cards = section.querySelectorAll('.client-card');
+                let hasVisibleCard = false;
+
+                cards.forEach(card => {
+                    const clientName = card.querySelector('.client-name').innerText.toLowerCase();
+                    if (clientName.includes(searchTerm)) {
+                        card.classList.remove('hidden');
+                        card.style.display = 'flex'; // Restore inline style overridden by class
+                        hasVisibleCard = true;
+                        visibleCardCount++;
+                    } else {
+                        card.classList.add('hidden');
+                        card.style.display = 'none'; // Force hide
+                    }
+                });
+
+                // Toggle visibility of the inner section
+                if (hasVisibleCard) {
+                    section.classList.remove('hidden');
+                } else {
+                    section.classList.add('hidden');
+                }
+            });
+
+            // Handle outer wrapping containers (to avoid excessive blank space when sections hide)
+            const wrappers = document.querySelectorAll('.category-wrapper');
+            wrappers.forEach(wrapper => {
+                const visibleSections = Array.from(wrapper.querySelectorAll('.section-container')).filter(sec => !sec.classList.contains('hidden'));
+                if (visibleSections.length > 0) {
+                    wrapper.classList.remove('hidden');
+                } else {
+                    wrapper.classList.add('hidden');
+                }
+            });
+
+            // Reset dropdown to default state when searching
+            if(searchTerm !== "") {
+                if (categorySelect) {
+                    categorySelect.value = "";
+                }
+                updateCategoryPickerLabel('');
+                syncCategoryPickerSelection();
+            }
+
+            if (noResultsMessage) {
+                noResultsMessage.classList.toggle('hidden', !(searchTerm !== "" && visibleCardCount === 0));
+            }
+
+            updateSearchClearButton();
+
+            if (searchTerm !== "") {
+                bringSearchResultsIntoView(visibleCardCount > 0);
+            }
+        }
+
+        // Modal Functionality
+        function handleClientClick(name, links) {
+			if (links && links.length > 1) {
+				// Show popup for multiple links
+				openModal(name, links);
+			} else {
+				// Fallback just in case a single link is passed here
+				console.log(`Directly opening portal for: ${name}`);
+			}
+		}
+
+		function openModal(name, links) {
+			modalName.innerText = name;
+			linkContainer.innerHTML = '';
+
+			links.forEach(linkData => {
+				// Create an <a> tag for native link behavior
+				const linkEl = document.createElement('a');
+				linkEl.className = 'portal-btn block'; // 'block' ensures it spans full width
+
+				// Check if using the new object format {title, url}
+				if (typeof linkData === 'object') {
+					linkEl.innerText = linkData.title;
+					linkEl.href = linkData.url;
+					if (linkData.url && linkData.url !== '#') {
+						linkEl.target = '_blank';
+						linkEl.rel = 'noopener noreferrer';
+					}
+				} else {
+					// Fallback just in case you haven't updated all old string links yet
+					linkEl.innerText = linkData;
+					linkEl.href = '#'; 
+				}
+
+				// Close modal when link is clicked
+				linkEl.onclick = () => {
+					closeModal();
+				};
+
+				linkContainer.appendChild(linkEl);
+			});
+
+			modal.classList.add('active');
+			document.body.style.overflow = 'hidden';
+		}
+
+        function closeModal() {
+            modal.classList.remove('active');
+            document.body.style.overflow = 'auto';
+        }
+
+        window.onclick = (e) => { if (e.target == modal) closeModal(); };
+
+        function toggleGoToTopButton() {
+            if (!goToTopBtn) return;
+            goToTopBtn.classList.toggle('visible', window.scrollY > 300);
+        }
+
+        function scrollToTop() {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        }
+
+        if (goToTopBtn) {
+            goToTopBtn.addEventListener('click', scrollToTop);
+            window.addEventListener('scroll', toggleGoToTopButton, { passive: true });
+            toggleGoToTopButton();
+        }
+
+        if (categoryPickerButton) {
+            categoryPickerButton.addEventListener('click', () => {
+                setCategoryPickerOpen(!categoryPicker.classList.contains('open'));
+            });
+
+            categoryPickerButton.addEventListener('keydown', (event) => {
+                if ((event.key === 'ArrowDown' || event.key === 'ArrowUp') && categoryPickerMenu) {
+                    event.preventDefault();
+                    setCategoryPickerOpen(true);
+
+                    const options = categoryPickerScroll?.querySelectorAll('.category-picker-option') || [];
+                    const targetOption = event.key === 'ArrowUp' ? options[options.length - 1] : options[0];
+                    if (targetOption) {
+                        targetOption.focus();
+                    }
+                }
+            });
+        }
+
+        if (categoryPickerScroll) {
+            categoryPickerScroll.addEventListener('keydown', (event) => {
+                const options = Array.from(categoryPickerScroll.querySelectorAll('.category-picker-option'));
+                const currentIndex = options.indexOf(document.activeElement);
+
+                if (event.key === 'ArrowDown') {
+                    event.preventDefault();
+                    const nextIndex = currentIndex < options.length - 1 ? currentIndex + 1 : 0;
+                    options[nextIndex]?.focus();
+                }
+
+                if (event.key === 'ArrowUp') {
+                    event.preventDefault();
+                    const previousIndex = currentIndex > 0 ? currentIndex - 1 : options.length - 1;
+                    options[previousIndex]?.focus();
+                }
+
+                if (event.key === 'Escape') {
+                    event.preventDefault();
+                    setCategoryPickerOpen(false);
+                    categoryPickerButton?.focus();
+                }
+            });
+        }
+
+        document.addEventListener('click', (event) => {
+            const clickedInsideTrigger = categoryPicker && categoryPicker.contains(event.target);
+            const clickedInsideMenu = categoryPickerMenu && categoryPickerMenu.contains(event.target);
+
+            if (!clickedInsideTrigger && !clickedInsideMenu) {
+                setCategoryPickerOpen(false);
+            }
+        });
+
+        document.addEventListener('keydown', (event) => {
+            if (event.key === 'Escape') {
+                setCategoryPickerOpen(false);
+            }
+        });
+
+        window.addEventListener('resize', () => {
+            if (categoryPicker?.classList.contains('open')) {
+                positionCategoryPickerMenu();
+            }
+
+            if (universityLogoStage) {
+                const previousOffset = universityLogoGroupWidth ? universityLogoStage.scrollLeft - universityLogoGroupWidth : 0;
+                syncUniversityLogoSlider(false);
+
+                window.requestAnimationFrame(() => {
+                    if (universityLogoGroupWidth > 0) {
+                        universityLogoStage.scrollLeft = universityLogoGroupWidth + previousOffset;
+                        normalizeUniversityLogoScroll();
+                    }
+                });
+            }
+        });
+
+        window.addEventListener('scroll', () => {
+            if (categoryPicker?.classList.contains('open')) {
+                positionCategoryPickerMenu();
+            }
+        }, { passive: true });
+
+        if (universityLogoStage && universityLogoTrackPrimary && universityLogoTrackClone && universityLogoTrack) {
+            syncUniversityLogoSlider();
+
+            universityLogoStage.addEventListener('pointerdown', startUniversityLogoDrag);
+            universityLogoStage.addEventListener('pointermove', moveUniversityLogoDrag);
+            universityLogoStage.addEventListener('pointerup', endUniversityLogoDrag);
+            universityLogoStage.addEventListener('pointercancel', endUniversityLogoDrag);
+            universityLogoStage.addEventListener('pointerleave', (event) => {
+                if (universityLogoDragging && event.pointerType === 'mouse') {
+                    endUniversityLogoDrag(event);
+                }
+            });
+            universityLogoStage.addEventListener('keydown', (event) => {
+                if (event.key === 'ArrowLeft') {
+                    event.preventDefault();
+                    scrollUniversityLogos(-1);
+                }
+
+                if (event.key === 'ArrowRight') {
+                    event.preventDefault();
+                    scrollUniversityLogos(1);
+                }
+            });
+
+            logoNavPrev?.addEventListener('click', () => scrollUniversityLogos(-1));
+            logoNavNext?.addEventListener('click', () => scrollUniversityLogos(1));
+
+            document.addEventListener('visibilitychange', () => {
+                universityLogoLastTimestamp = 0;
+            });
+
+            universityLogoAnimationFrame = window.requestAnimationFrame(animateUniversityLogoSlider);
+        }
+
+        buildCategoryPickerOptions();
+    </script>
+
+</body>
+</html>

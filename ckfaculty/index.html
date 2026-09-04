@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>CrossKnowledge Faculty: The Impact Report</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap');
+
+        :root{
+            /* PRIMARY THEME */
+            --primary: #2563EB;
+            --primary-light: #3B82F6;
+            --primary-dark: #072279;
+
+            /* SECONDARY / ACCENTS */
+            --emerald: #10B981;
+            --amber: #F59E0B;
+            --amber-dark: #D97706;
+            --rose: #FB7185;
+            --red: #DC2626;
+            --sky: #0EA5E9;
+            --indigo: #6366F1;
+            --teal: #14B8A6;
+
+            /* NEUTRALS */
+            --page-bg: #F8FAFC;
+            --neutral-100: #F1F5F9;
+            --neutral-200: #E2E8F0;
+            --text: #0F172A;
+            --muted: #64748B;
+            --muted-2: #94A3B8;
+            --white: #FFFFFF;
+            --black: #000000;
+
+            --scroll-thumb: var(--primary);
+            --card-shadow: 0 20px 25px -5px rgba(0,0,0,0.1),
+                           0 10px 10px -5px rgba(0,0,0,0.04);
+        }
+
+        #directory {
+            --expert-icon-bg: #E0ECFF;
+            --expert-icon-text: #2563EB;
+
+            --expert-icon-hover-bg: #2563EB;
+            --expert-icon-hover-text: #FFFFFF;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--page-bg);
+            color: var(--text);
+        }
+
+        html { scroll-behavior: smooth; }
+
+        .chart-container {
+            position: relative;
+            width: 100%;
+            height: 350px;
+            max-height: 400px;
+        }
+
+        .custom-scroll::-webkit-scrollbar { width: 6px; }
+        .custom-scroll::-webkit-scrollbar-track { background: var(--neutral-200); }
+        .custom-scroll::-webkit-scrollbar-thumb {
+            background: var(--scroll-thumb);
+            border-radius: 3px;
+        }
+
+        .faculty-card { transition: all 0.3s ease; }
+        .faculty-card:hover{
+            transform: translateY(-5px);
+            box-shadow: var(--card-shadow);
+        }
+
+        .bg-primary-gradient {
+            background: linear-gradient(135deg, var(--primary-dark), var(--primary));
+        }
+
+        .border-neutral-200 { border-color: var(--neutral-200); }
+        .text-muted { color: var(--muted); }
+        .text-muted-2 { color: var(--muted-2); }
+    </style>
+</head>
+
+<body class="text-[color:var(--text)]">
+    <nav class="sticky top-0 z-50 bg-[color:rgba(255,255,255,0.5)] backdrop-blur-md shadow-sm border-b border-[color:var(--neutral-200)]">
+        <div class="container mx-auto px-6 py-3 flex justify-between items-center">
+            <div class="font-black text-xl text-[color:var(--primary-dark)] tracking-tighter">
+                CK<span class="text-[color:var(--primary)]">FACULTY</span>
+            </div>
+
+            <div class="space-x-4 text-sm font-semibold text-[color:var(--muted)] hidden md:block">
+                <a href="#stats" class="hover:text-[color:var(--primary)] transition">Impact</a>
+                <a href="#featured" class="hover:text-[color:var(--primary)] transition">Featured Leaders</a>
+                <a href="#directory" class="hover:text-[color:var(--primary)] transition">Directory</a>
+            </div>
+        </div>
+    </nav>
+
+    <header class="bg-gradient-to-br from-[color:var(--text)] via-[color:var(--primary-dark)] to-[color:var(--primary)] text-white relative overflow-hidden">
+        <div class="absolute top-0 right-0 w-96 h-96 bg-[color:var(--primary)] rounded-full mix-blend-overlay filter blur-3xl opacity-20 -mr-20 -mt-20"></div>
+
+        <div class="container mx-auto px-6 py-20 text-center relative z-10">
+            <span class="bg-[color:rgba(255,255,255,0.20)] text-[color:#B4D6FF] text-xs font-bold px-3 py-1 rounded-full uppercase tracking-widest border border-[color:rgba(59,130,246,0.15)] mb-4 inline-block">
+                The Global Standard
+            </span>
+
+            <h1 class="text-5xl md:text-6xl font-black tracking-tight mb-6 leading-tight">
+                Unlock the Wisdom of <br>
+                <span class="text-transparent bg-clip-text bg-gradient-to-r from-[color:var(--primary-light)] to-white">
+                    World-Class Thinkers
+                </span>
+            </h1>
+
+            <p class="text-[16px] text-[color:#FFFFFF] font-light max-w-[850px] mx-auto mb-10">
+                Access the minds of Marshall Goldsmith, Amy Edmondson, and 60+ experts from Harvard, INSEAD, and beyond. Real-world insights for corporate impact.
+            </p>
+
+            <div class="flex justify-center gap-4">
+                <a href="#directory" class="bg-white hover:bg-[color:#3B82F6] text-[color:#072279] hover:text-white font-bold py-3 px-8 rounded-full transition shadow-lg shadow-[rgba(30,64,175,0.5)]">
+                    Explore Directory
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <main class="container mx-auto px-6 py-16 space-y-20">
+
+        <section id="stats" class="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div class="bg-white p-8 rounded-2xl shadow-sm border border-[color:var(--neutral-100)] text-center group hover:border-[color:var(--primary-light)] transition">
+                <div class="text-5xl font-black text-[color:var(--primary)] mb-2 group-hover:scale-110 transition duration-300">
+                    65+
+                </div>
+                <div class="text-sm font-bold text-[color:var(--muted-2)] uppercase tracking-widest">Global Experts</div>
+                <p class="text-[color:var(--muted)] text-sm mt-3">Authors, Professors, & CEOs</p>
+            </div>
+            <div class="bg-white p-8 rounded-2xl shadow-sm border border-[color:var(--neutral-100)] text-center group hover:border-[color:var(--primary-light)] transition">
+                <div class="text-5xl font-black text-[color:var(--emerald)] mb-2 group-hover:scale-110 transition duration-300">#1</div>
+                <div class="text-sm font-bold text-[color:var(--muted-2)] uppercase tracking-widest">Ranked Content</div>
+                <p class="text-[color:var(--muted)] text-sm mt-3">Featuring Thinkers50 Leaders</p>
+            </div>
+
+            <div class="bg-white p-8 rounded-2xl shadow-sm border border-[color:var(--neutral-100)] text-center group hover:border-[color:var(--primary-light)] transition">
+                <div class="text-5xl font-black text-[color:var(--amber)] mb-2 group-hover:scale-110 transition duration-300">20+</div>
+                <div class="text-sm font-bold text-[color:var(--muted-2)] uppercase tracking-widest">Top Institutions</div>
+                <p class="text-[color:var(--muted)] text-sm mt-3">HBS, INSEAD, Wharton, LBS</p>
+            </div>
+        </section>
+
+        <section id="featured">
+            <div class="flex flex-col md:flex-row justify-between items-end mb-10 border-b border-[color:var(--neutral-100)] pb-4">
+                <div>
+                    <h2 class="text-3xl font-bold text-[color:var(--text)]">Featured Thought Leaders</h2>
+                    <p class="text-[color:var(--muted)] mt-2">The architects of modern management theory.</p>
+                </div>
+                <span class="text-xs font-bold text-[color:var(--primary)] bg-[color:rgba(59,130,246,0.08)] px-3 py-1 rounded-full uppercase">Top Tier</span>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+
+                <div class="faculty-card bg-white rounded-2xl overflow-hidden shadow-lg border border-[color:var(--neutral-100)] flex flex-col">
+                    <div class="h-24 bg-gradient-to-r from-[color:var(--amber)] to-[color:var(--amber-dark)]"></div>
+                    <div class="px-6 relative flex-grow flex flex-col">
+                        <img src="https://www.crossknowledge.com/wp-content/uploads/cache/2021/12/marshall-goldsmith/2807758965.jpg"
+                             class="w-24 h-24 rounded-full border-4 border-white shadow-md absolute -top-12 left-6 object-cover bg-[color:var(--neutral-100)] z-10">
+
+                        <div class="mt-14 mb-6">
+                            <div class="flex justify-between items-start mb-1">
+                                <h3 class="text-xl font-bold leading-tight">Marshall<br>Goldsmith</h3>
+                                <span class="bg-[color:rgba(183,72,0,0.08)] text-[color:var(--amber-dark)] text-[10px] font-bold px-2 py-1 rounded shadow-sm">#1 Leadership<br>Thinker</span>
+                            </div>
+                            <p class="text-sm font-bold text-[color:var(--primary)] mb-3">Focus: Behavioral Change</p>
+                            <blockquote class="italic text-[color:var(--muted)] text-sm mb-4">"What got you here won't get you there."</blockquote>
+                            <p class="text-xs text-[color:var(--muted)] leading-relaxed">
+                                World's #1 Executive Coach. His content focuses on practical, actionable behavioral shifts for leaders transitioning to higher roles.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="faculty-card bg-white rounded-2xl overflow-hidden shadow-lg border border-[color:var(--neutral-100)] flex flex-col">
+                    <div class="h-24 bg-gradient-to-r from-[color:var(--emerald)] to-[color:var(--teal)]"></div>
+                    <div class="px-6 relative flex-grow flex flex-col">
+                        <img src="https://www.crossknowledge.com/wp-content/uploads/cache/2021/12/amy-edmondson/3992313621.jpg"
+                             class="w-24 h-24 rounded-full border-4 border-white shadow-md absolute -top-12 left-6 object-cover z-10">
+
+                        <div class="mt-14 mb-6">
+                            <div class="flex justify-between mb-1">
+                                <h3 class="text-xl font-bold leading-tight">Amy C.<br>Edmondson</h3>
+                                <span class="bg-[color:rgba(16,185,129,0.08)] text-[color:var(--emerald)] text-[10px] font-bold px-2 py-1 rounded shadow-sm">
+                                    Harvard<br>Business School
+                                </span>
+                            </div>
+                            <p class="text-sm font-bold text-[color:var(--emerald)] mb-3">Focus: Psychological Safety</p>
+                            <blockquote class="italic text-[color:var(--muted)] text-sm mb-4">"The Fearless Organization"</blockquote>
+                            <p class="text-xs text-[color:var(--muted)] leading-relaxed">
+                                Novartis Professor at HBS. Teaches managers how to build teams where people feel safe to innovate and learn.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="faculty-card bg-white rounded-2xl overflow-hidden shadow-lg border border-[color:var(--neutral-100)] flex flex-col">
+                    <div class="h-24 bg-gradient-to-r from-[color:var(--primary)] to-[color:var(--indigo)]"></div>
+                    <div class="px-6 relative flex-grow flex flex-col">
+                        <img src="https://www.crossknowledge.com/wp-content/uploads/cache/2022/05/patrick-lencioni/692147262.jpg"
+                             class="w-24 h-24 rounded-full border-4 border-white shadow-md absolute -top-12 left-6 object-cover z-10">
+
+                        <div class="mt-14 mb-6">
+                            <div class="flex justify-between mb-1">
+                                <h3 class="text-xl font-bold leading-tight">Patrick<br>Lencioni</h3>
+                                <span class="bg-[color:rgba(0,30,183,0.08)] text-[color:var(--primary-dark)] text-[10px] font-bold px-2 py-1 rounded shadow-sm">
+                                    The Table<br>Group
+                                </span>
+                            </div>
+                            <p class="text-sm font-bold text-[color:var(--primary)] mb-3">Focus: Organizational Health</p>
+                            <blockquote class="italic text-[color:var(--muted)] text-sm mb-4">
+                                "Teamwork remains the ultimate competitive advantage."
+                            </blockquote>
+                            <p class="text-xs text-[color:var(--muted)] leading-relaxed">
+                                Pioneer of the "Five Dysfunctions of a Team" model, helping organizations build cohesive and high-performing teams.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="faculty-card bg-white rounded-2xl overflow-hidden shadow-lg border border-[color:var(--neutral-100)] flex flex-col">
+                    <div class="h-24 bg-gradient-to-r from-[color:var(--indigo)] to-[color:var(--indigo)]"></div>
+                    <div class="px-6 relative flex-grow">
+                        <img src="https://www.crossknowledge.com/wp-content/uploads/cache/2015/10/manfred-kets-de-vries-v2/2290940764.jpg"
+                             class="w-24 h-24 rounded-full border-4 border-white shadow-md absolute -top-12 left-6 object-cover z-10">
+
+                        <div class="mt-14 mb-6">
+                            <div class="flex justify-between mb-1">
+                                <h3 class="text-xl font-bold leading-tight">Manfred<br>Kets de Vries</h3>
+                                <span class="bg-[color:rgba(99,102,241,0.08)] text-[color:var(--indigo)] text-[10px] font-bold px-2 py-1 rounded shadow-sm">
+                                    INSEAD<br>Professor
+                                </span>
+                            </div>
+                            <p class="text-sm font-bold text-[color:var(--indigo)] mb-3">Focus: Leadership Psychology</p>
+                            <blockquote class="italic text-[color:var(--muted)] text-sm mb-4">
+                                "Leaders need to be merchants of hope."
+                            </blockquote>
+                            <p class="text-xs text-[color:var(--muted)] leading-relaxed">
+                                Bridges management and psychoanalysis to decode leadership behavior.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="faculty-card bg-white rounded-2xl overflow-hidden shadow-lg border border-[color:var(--neutral-100)] flex flex-col">
+                    <div class="h-24 bg-gradient-to-r from-[color:var(--rose)] to-[color:var(--red)]"></div>
+                    <div class="px-6 relative flex-grow flex flex-col">
+                        <img src="https://www.crossknowledge.com/wp-content/uploads/cache/2021/12/tal-ben-shahar/1290710419.jpg"
+                             class="w-24 h-24 rounded-full border-4 border-white shadow-md absolute -top-12 left-6 object-cover z-10">
+
+                        <div class="mt-14 mb-6">
+                            <div class="flex justify-between mb-1">
+                                <h3 class="text-xl font-bold leading-tight">Tal<br>Ben-Shahar</h3>
+                                <span class="bg-[color:rgba(251,113,133,0.08)] text-[color:var(--rose)] text-[10px] font-bold px-2 py-1 rounded shadow-sm">
+                                    Happiness<br>Studies
+                                </span>
+                            </div>
+                            <p class="text-sm font-bold text-[color:var(--rose)] mb-3">Focus: Positive Psychology</p>
+                            <blockquote class="italic text-[color:var(--muted)] text-sm mb-4">
+                                "When you appreciate the good, the good appreciates."
+                            </blockquote>
+                            <p class="text-xs text-[color:var(--muted)] leading-relaxed">
+                                Former Harvard lecturer focusing on leadership, happiness, and resilience.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="faculty-card bg-white rounded-2xl overflow-hidden shadow-lg border border-[color:var(--neutral-100)] flex flex-col">
+                    <div class="h-24 bg-gradient-to-r from-[color:var(--sky)] to-[color:var(--teal)]"></div>
+                    <div class="px-6 relative flex-grow flex flex-col">
+                        <img src="https://www.crossknowledge.com/wp-content/uploads/cache/2018/07/fons-trompenaars-v2/1292358375.jpg"
+                             class="w-24 h-24 rounded-full border-4 border-white shadow-md absolute -top-12 left-6 object-cover z-10">
+
+                        <div class="mt-14 mb-6">
+                            <div class="flex justify-between mb-1">
+                                <h3 class="text-xl font-bold leading-tight">Fons<br>Trompenaars</h3>
+                                <span class="bg-[color:rgba(14,165,233,0.08)] text-[color:var(--sky)] text-[10px] font-bold px-2 py-1 rounded shadow-sm">
+                                    THT<br>Consulting
+                                </span>
+                            </div>
+                            <p class="text-sm font-bold text-[color:var(--sky)] mb-3">Focus: Intercultural Mgmt</p>
+                            <blockquote class="italic text-[color:var(--muted)] text-sm mb-4">
+                                "There is no one best way of managing and organizing."
+                            </blockquote>
+                            <p class="text-xs text-[color:var(--muted)] leading-relaxed">
+                                Global authority on cross-cultural communication and global leadership.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <section id="directory" class="bg-white rounded-2xl shadow-sm border border-[color:var(--neutral-100)] overflow-hidden">
+            <div class="bg-[color:var(--text)] p-8 text-white">
+                <h2 class="text-2xl font-bold">Full Expert Directory</h2>
+                <p class="text-[color:var(--neutral-200)] mt-1">Click any name to view their full profile.</p>
+            </div>
+
+            <div class="p-8">
+                <div id="expertList" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3"></div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="bg-[color:var(--text)] text-[color:var(--neutral-200)] py-12 text-center text-sm">
+        <p>&copy; 2025 CrossKnowledge Faculty Infographic. All rights reserved.</p>
+        <p class="mt-2 text-[color:var(--muted)]">Created for Educational Purposes</p>
+    </footer>
+<script>
+    const rootStyles = getComputedStyle(document.documentElement);
+    const CSS = {
+        primary: rootStyles.getPropertyValue('--primary').trim() || '#2563EB',
+        primaryLight: rootStyles.getPropertyValue('--primary-light').trim() || '#3B82F6',
+        primaryDark: rootStyles.getPropertyValue('--primary-dark').trim() || '#1E40AF',
+        emerald: rootStyles.getPropertyValue('--emerald').trim() || '#10B981',
+        amber: rootStyles.getPropertyValue('--amber').trim() || '#F59E0B',
+        indigo: rootStyles.getPropertyValue('--indigo').trim() || '#6366F1',
+        sky: rootStyles.getPropertyValue('--sky').trim() || '#0EA5E9'
+    };
+
+    /* UPDATED AUTHOR LIST — synchronized with Faculty_Updated.html */
+    const facultyRaw = [
+        "Adam Grant|adam-grant", "Amber Cabral|amber-cabral", "Amber Dailey-Hebert|amber-dailey-hebert",
+        "Amit Mukherjee|amit-mukherjee", "Amy C. Edmondson|amy-edmondson", "Andrew Kinder|andrew-kinder",
+        "Anne-Laure Fayard|anne-laure-fayard", "Antonio Nieto-Rodriguez|antonio-nieto-rodriguez",
+        "Avivah Wittenberg-Cox|avivah-wittenberg-cox",
+
+        "Brian Spisak|brian-spisak", "Butch Bellah|butch-bellah",
+        
+        "Charles Handy|charles-handy", "Chris Mullard|chris-mullard-2",
+        "Chris Trimble|chris-trimble", "Christopher Worley|christopher-worley",
+
+        "Dave Mitchell|dave-mitchell", "David Bell|david-bell",
+        "Diane Hamilton|diane-hamilton", "Diana Woodburn|diana-woodburn",
+        "Didier Noyé|didier-noye", "Donna Butler|donna-butler", "Dorie Clark|dorie-clark",
+
+        "Edward Lawler|edward-lawler", "Elise Keith|elise-keith", "Eric Albert|eric-albert",
+        "Erica Dhawan|erica-dhawan",
+
+        "Fons Trompenaars|fons-trompenaars", "Francis Cholle|francis-cholle",
+
+        "Gad Allon|gad-allon", "Gill Hasson|gill-hasson", "Gorick Ng|gorick-ng",
+
+        "Isaac Getz|isaac-getz",
+
+        "Jack Kaplan|jack-kaplan", "Jason W. Womack|jason-w-womack",
+        "Jean-Claude Larréché|jean-claude-larreche", "Jean-Roch Houllier|jean-roch-houllier",
+        "Jeanne Meister|jeanne-meister", "Jeremy Myerson|jeremy-myerson",
+        "JP Eggers|jp-eggers", "Julian Baggini|julian-baggini",
+        "Jurgen Appelo|jurgen-appelo",
+
+        "Kavita Annapoorani Ganesan|kavita-ganesan",
+
+        "Lisette Sutherland|lisette-sutherland",
+
+        "Manfred Kets de Vries|manfred-kets-de-vries", "Marc Bertoneche|marc-bertoneche",
+        "Marie Miyashiro|marie-miyashiro", "Marshall Goldsmith|marshall-goldsmith",
+        "Martha Gabriel|martha-gabriel", "Matthieu Ricard|matthieu-ricard",
+        "Maura Thomas|maura-thomas", "Megan Gerhardt|megan-gerhardt",
+        "Michael Solomon|michael-solomon", "Michel Fender|michel-fender",
+        "Mimi Kalinda|mimi-kalinda", "Monika Hamori|monika-hamori",
+
+        "Nabil Harfoush|nabil-harfoush", "Natalia Levina|natalia-levina",
+        "Nathan Furr|nathan-furr", "Nigel Ewington|nigel-egwington",
+
+        "Olivier Sibony|olivier-sibony",
+
+        "Pascal Quiry|pascal-quiry", "Patrick Lencioni|patrick-lencioni",
+
+        "Rahaf Harfoush|rahaf-harfoush", "Robert Dilts|robert-dilts",
+
+        "Scott Snook|scott-snook", "Shep Hyken|shep-hyken", "Steve Muylle|steve-muylle",
+        "Susannah Harmon Furr|susannah-harmon-furr",
+
+        "Tal Ben-Shahar|tal-ben-shahar", "Tammy Hughes|tammy-hughes",
+        "Tiffani Bova|tiffani-bova", "Tom Chatfield|tom-chatfield",
+        "Tom Peters|tom-peters",
+
+        "Vince Molinaro|vince-molinaro",
+
+        "Warren Cass|warren-cass"
+    ];
+
+    const faculty = facultyRaw.map(item => {
+        const parts = item.split('|');
+        return { name: parts[0], slug: parts[1] };
+    });
+
+    /* DIRECTORY POPULATION */
+    const listContainer = document.getElementById("expertList");
+    const dirEl = document.getElementById("directory");
+    const dirStyles = dirEl ? getComputedStyle(dirEl) : null;
+
+    const dirVars = {
+        cardBg: dirStyles.getPropertyValue("--expert-card-bg") || "#ffffff",
+        cardBorder: dirStyles.getPropertyValue("--expert-card-border") || "rgba(226,232,240,1)",
+        cardHoverBg: dirStyles.getPropertyValue("--expert-card-hover-bg") || "#F8FAFC",
+        cardHoverBorder: dirStyles.getPropertyValue("--expert-card-hover-border") || "rgba(148,163,184,1)",
+
+        iconBg: dirStyles.getPropertyValue("--expert-icon-bg") || "#EFF6FF",
+        iconText: dirStyles.getPropertyValue("--expert-icon-text") || "#2563EB",
+        iconHoverBg: dirStyles.getPropertyValue("--expert-icon-hover-bg") || "#2563EB",
+        iconHoverText: dirStyles.getPropertyValue("--expert-icon-hover-text") || "#FFFFFF",
+        arrowColor: dirStyles.getPropertyValue("--expert-arrow-color") || "#60A5FA"
+    };
+
+    faculty.sort((a, b) => a.name.localeCompare(b.name)).forEach(person => {
+        const a = document.createElement("a");
+        a.href = `https://www.crossknowledge.com/experts/${person.slug}/`;
+        a.target = "_blank";
+        a.className = "group flex items-center p-3 rounded-lg transition text-[color:var(--muted)] text-sm font-medium";
+        a.style.background = dirVars.cardBg;
+        a.style.border = `1px solid ${dirVars.cardBorder}`;
+
+        a.innerHTML = `
+            <span class="w-8 h-8 rounded-full flex items-center justify-center text-xs font-bold mr-3 transition"
+                  style="background:${dirVars.iconBg};color:${dirVars.iconText};">
+                ${person.name.split(" ").map(n => n[0]).join("").substring(0,2)}
+            </span>
+            <span class="truncate" style="flex:1;">${person.name}</span>
+            <span class="ml-auto opacity-0 group-hover:opacity-100" style="color:${dirVars.arrowColor};">↗</span>
+        `;
+
+        listContainer.appendChild(a);
+
+        // hover
+        const icon = a.querySelector("span");
+        a.addEventListener("mouseenter", () => {
+            a.style.background = dirVars.cardHoverBg;
+            a.style.border = `1px solid ${dirVars.cardHoverBorder}`;
+            icon.style.background = dirVars.iconHoverBg;
+            icon.style.color = dirVars.iconHoverText;
+        });
+        a.addEventListener("mouseleave", () => {
+            a.style.background = dirVars.cardBg;
+            a.style.border = `1px solid ${dirVars.cardBorder}`;
+            icon.style.background = dirVars.iconBg;
+            icon.style.color = dirVars.iconText;
+        });
+    });
+</script>
+</body>
+</html>

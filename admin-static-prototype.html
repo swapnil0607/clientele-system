@@ -1,0 +1,784 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clientele Admin | Eduriser</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800;900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --brand: #002F80;
+            --brand-soft: #eaf2ff;
+            --ink: #0f172a;
+            --line: #e2e8f0;
+        }
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #f6f8fb;
+            color: var(--ink);
+        }
+        .app-shell {
+            min-height: 100vh;
+        }
+        .admin-card {
+            border: 1px solid var(--line);
+            border-radius: 0.75rem;
+            background: #ffffff;
+            box-shadow: 0 16px 36px -32px rgba(15, 23, 42, 0.45);
+        }
+        .field-label {
+            display: block;
+            margin-bottom: 0.4rem;
+            color: #334155;
+            font-size: 0.78rem;
+            font-weight: 800;
+            letter-spacing: 0.04em;
+            text-transform: uppercase;
+        }
+        .form-control {
+            width: 100%;
+            border: 1px solid #cbd5e1;
+            border-radius: 0.65rem;
+            background: #fff;
+            padding: 0.72rem 0.85rem;
+            color: #0f172a;
+            font-size: 0.92rem;
+            outline: none;
+            transition: border-color 0.2s ease, box-shadow 0.2s ease;
+        }
+        .form-control:focus {
+            border-color: #2563eb;
+            box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.12);
+        }
+        .btn {
+            display: inline-flex;
+            min-height: 2.55rem;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            border-radius: 0.65rem;
+            padding: 0.65rem 0.95rem;
+            font-size: 0.88rem;
+            font-weight: 800;
+            transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease, box-shadow 0.2s ease;
+        }
+        .btn-primary {
+            border: 1px solid var(--brand);
+            background: var(--brand);
+            color: #fff;
+        }
+        .btn-primary:hover {
+            background: #06449f;
+            box-shadow: 0 12px 26px -18px rgba(0, 47, 128, 0.75);
+        }
+        .btn-secondary {
+            border: 1px solid #cbd5e1;
+            background: #fff;
+            color: #1e293b;
+        }
+        .btn-secondary:hover {
+            border-color: #93c5fd;
+            color: #1d4ed8;
+            background: #eff6ff;
+        }
+        .btn-danger {
+            border: 1px solid #fecaca;
+            background: #fff;
+            color: #b91c1c;
+        }
+        .btn-danger:hover {
+            border-color: #fca5a5;
+            background: #fef2f2;
+        }
+        .icon-btn {
+            width: 2.35rem;
+            height: 2.35rem;
+            padding: 0;
+        }
+        .status-pill {
+            display: inline-flex;
+            align-items: center;
+            border-radius: 999px;
+            padding: 0.22rem 0.6rem;
+            font-size: 0.72rem;
+            font-weight: 800;
+        }
+        .status-active {
+            background: #dcfce7;
+            color: #166534;
+        }
+        .status-paused {
+            background: #f1f5f9;
+            color: #475569;
+        }
+        .table-wrap {
+            overflow-x: auto;
+        }
+        .client-table {
+            min-width: 780px;
+        }
+        .client-table th {
+            padding: 0.8rem 1rem;
+            color: #475569;
+            font-size: 0.73rem;
+            font-weight: 900;
+            letter-spacing: 0.08em;
+            text-align: left;
+            text-transform: uppercase;
+            background: #f8fafc;
+            border-bottom: 1px solid var(--line);
+        }
+        .client-table td {
+            padding: 0.9rem 1rem;
+            border-bottom: 1px solid #eef2f7;
+            vertical-align: middle;
+        }
+        .category-tab {
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 0.75rem;
+            border-radius: 0.65rem;
+            padding: 0.72rem 0.82rem;
+            color: #334155;
+            font-size: 0.9rem;
+            font-weight: 800;
+            text-align: left;
+        }
+        .category-tab:hover,
+        .category-tab.active {
+            background: var(--brand-soft);
+            color: #1d4ed8;
+        }
+        .category-count {
+            min-width: 1.75rem;
+            border-radius: 999px;
+            background: #e2e8f0;
+            padding: 0.15rem 0.45rem;
+            color: #334155;
+            font-size: 0.72rem;
+            font-weight: 900;
+            text-align: center;
+        }
+        .category-tab.active .category-count {
+            background: #2563eb;
+            color: white;
+        }
+        .login-panel {
+            min-height: 100vh;
+            background:
+                linear-gradient(135deg, rgba(0, 47, 128, 0.94), rgba(20, 83, 145, 0.78)),
+                url('https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&q=80&w=2000') center/cover;
+        }
+        .hidden {
+            display: none !important;
+        }
+    </style>
+</head>
+<body>
+    <main id="loginView" class="login-panel flex items-center justify-center px-5 py-10">
+        <section class="admin-card w-full max-w-md p-6 sm:p-8">
+            <div class="mb-8 flex justify-center">
+                <img src="https://eduriserck.com/eduriser/eduriser-logo.svg" alt="EduRiser Logo" class="h-12 w-auto">
+            </div>
+            <h1 class="text-2xl font-black tracking-tight text-slate-950">Clientele Admin</h1>
+            <p class="mt-2 text-sm leading-6 text-slate-600">Sign in to manage clients, links, logos, and category placement.</p>
+            <form id="loginForm" class="mt-7 space-y-5">
+                <div>
+                    <label for="username" class="field-label">Username</label>
+                    <input id="username" class="form-control" type="text" autocomplete="username" required>
+                </div>
+                <div>
+                    <label for="password" class="field-label">Password</label>
+                    <input id="password" class="form-control" type="password" autocomplete="current-password" required>
+                </div>
+                <p id="loginError" class="hidden rounded-lg bg-red-50 px-3 py-2 text-sm font-semibold text-red-700">Invalid admin credentials.</p>
+                <button class="btn btn-primary w-full" type="submit">
+                    <i data-lucide="log-in" class="h-4 w-4"></i>
+                    Sign In
+                </button>
+            </form>
+        </section>
+    </main>
+
+    <main id="adminView" class="app-shell hidden">
+        <header class="sticky top-0 z-40 border-b border-slate-200 bg-white/88 backdrop-blur">
+            <div class="mx-auto flex max-w-7xl flex-col gap-4 px-5 py-4 lg:flex-row lg:items-center lg:justify-between">
+                <div class="flex items-center gap-4">
+                    <img src="https://eduriserck.com/eduriser/eduriser-logo.svg" alt="EduRiser Logo" class="h-10 w-auto">
+                    <div>
+                        <h1 class="text-xl font-black tracking-tight">Clientele Admin</h1>
+                        <p class="text-sm font-semibold text-slate-500">Manage client records by category</p>
+                    </div>
+                </div>
+                <div class="flex flex-wrap items-center gap-2">
+                    <a class="btn btn-secondary" href="index.html" target="_blank" rel="noopener noreferrer">
+                        <i data-lucide="external-link" class="h-4 w-4"></i>
+                        View Site
+                    </a>
+                    <button id="exportBtn" class="btn btn-secondary" type="button">
+                        <i data-lucide="download" class="h-4 w-4"></i>
+                        Export
+                    </button>
+                    <label class="btn btn-secondary cursor-pointer" for="importInput">
+                        <i data-lucide="upload" class="h-4 w-4"></i>
+                        Import
+                    </label>
+                    <input id="importInput" class="hidden" type="file" accept="application/json">
+                    <button id="logoutBtn" class="btn btn-danger" type="button">
+                        <i data-lucide="log-out" class="h-4 w-4"></i>
+                        Logout
+                    </button>
+                </div>
+            </div>
+        </header>
+
+        <section class="mx-auto grid max-w-7xl gap-5 px-5 py-6 sm:grid-cols-2 lg:grid-cols-4">
+            <div class="admin-card p-5">
+                <p class="text-xs font-black uppercase tracking-wider text-slate-500">Total Clients</p>
+                <p id="totalClients" class="mt-2 text-3xl font-black">0</p>
+            </div>
+            <div class="admin-card p-5">
+                <p class="text-xs font-black uppercase tracking-wider text-slate-500">Active Clients</p>
+                <p id="activeClients" class="mt-2 text-3xl font-black">0</p>
+            </div>
+            <div class="admin-card p-5">
+                <p class="text-xs font-black uppercase tracking-wider text-slate-500">Categories</p>
+                <p id="totalCategories" class="mt-2 text-3xl font-black">0</p>
+            </div>
+            <div class="admin-card p-5">
+                <p class="text-xs font-black uppercase tracking-wider text-slate-500">Selected Category</p>
+                <p id="selectedCategoryStat" class="mt-2 truncate text-2xl font-black">All</p>
+            </div>
+        </section>
+
+        <section class="mx-auto grid max-w-7xl gap-6 px-5 pb-10 lg:grid-cols-[18rem_minmax(0,1fr)]">
+            <aside class="admin-card p-4">
+                <div class="mb-4 flex items-center justify-between gap-3">
+                    <h2 class="text-sm font-black uppercase tracking-wider text-slate-500">Categories</h2>
+                    <button id="addCategoryBtn" class="btn btn-secondary icon-btn" type="button" title="Add category" aria-label="Add category">
+                        <i data-lucide="plus" class="h-4 w-4"></i>
+                    </button>
+                </div>
+                <div id="categoryList" class="space-y-1"></div>
+            </aside>
+
+            <section class="space-y-6">
+                <div class="admin-card p-5">
+                    <div class="grid gap-4 lg:grid-cols-[1fr_auto] lg:items-end">
+                        <div>
+                            <label for="searchInput" class="field-label">Search Clients</label>
+                            <div class="relative">
+                                <i data-lucide="search" class="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-slate-400"></i>
+                                <input id="searchInput" class="form-control pl-10" type="search" placeholder="Search by client, link, or category">
+                            </div>
+                        </div>
+                        <button id="newClientBtn" class="btn btn-primary" type="button">
+                            <i data-lucide="plus" class="h-4 w-4"></i>
+                            Add Client
+                        </button>
+                    </div>
+                </div>
+
+                <div class="admin-card overflow-hidden">
+                    <div class="flex flex-col gap-2 border-b border-slate-200 px-5 py-4 sm:flex-row sm:items-center sm:justify-between">
+                        <div>
+                            <h2 id="tableTitle" class="text-lg font-black">All Clients</h2>
+                            <p id="tableSubtitle" class="text-sm font-semibold text-slate-500">0 records</p>
+                        </div>
+                    </div>
+                    <div class="table-wrap">
+                        <table class="client-table w-full">
+                            <thead>
+                                <tr>
+                                    <th>Client</th>
+                                    <th>Category</th>
+                                    <th>Link</th>
+                                    <th>Status</th>
+                                    <th class="text-right">Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody id="clientRows"></tbody>
+                        </table>
+                    </div>
+                    <div id="emptyState" class="hidden px-5 py-12 text-center">
+                        <p class="text-lg font-black">No clients found</p>
+                        <p class="mt-1 text-sm font-semibold text-slate-500">Add a client or adjust the current filter.</p>
+                    </div>
+                </div>
+            </section>
+        </section>
+    </main>
+
+    <div id="clientModal" class="hidden fixed inset-0 z-50 flex items-center justify-center bg-slate-950/60 px-4 py-6 backdrop-blur-sm">
+        <section class="admin-card max-h-[92vh] w-full max-w-2xl overflow-y-auto p-5 sm:p-6">
+            <div class="mb-5 flex items-start justify-between gap-4">
+                <div>
+                    <h2 id="clientModalTitle" class="text-xl font-black">Add Client</h2>
+                    <p class="text-sm font-semibold text-slate-500">Client details are saved to local admin data.</p>
+                </div>
+                <button class="btn btn-secondary icon-btn" type="button" data-close-modal aria-label="Close">
+                    <i data-lucide="x" class="h-4 w-4"></i>
+                </button>
+            </div>
+            <form id="clientForm" class="grid gap-4 sm:grid-cols-2">
+                <input id="clientId" type="hidden">
+                <div class="sm:col-span-2">
+                    <label for="clientName" class="field-label">Client Name</label>
+                    <input id="clientName" class="form-control" type="text" required>
+                </div>
+                <div>
+                    <label for="clientCategory" class="field-label">Category</label>
+                    <select id="clientCategory" class="form-control" required></select>
+                </div>
+                <div>
+                    <label for="clientStatus" class="field-label">Status</label>
+                    <select id="clientStatus" class="form-control">
+                        <option value="active">Active</option>
+                        <option value="paused">Paused</option>
+                    </select>
+                </div>
+                <div class="sm:col-span-2">
+                    <label for="clientUrl" class="field-label">Portal Link</label>
+                    <input id="clientUrl" class="form-control" type="url" placeholder="https://example.com" required>
+                </div>
+                <div class="sm:col-span-2">
+                    <label for="clientLogo" class="field-label">Logo URL</label>
+                    <input id="clientLogo" class="form-control" type="url" placeholder="https://.../logo.png">
+                </div>
+                <div class="sm:col-span-2 flex flex-col-reverse gap-2 pt-2 sm:flex-row sm:justify-end">
+                    <button class="btn btn-secondary" type="button" data-close-modal>Cancel</button>
+                    <button class="btn btn-primary" type="submit">
+                        <i data-lucide="save" class="h-4 w-4"></i>
+                        Save Client
+                    </button>
+                </div>
+            </form>
+        </section>
+    </div>
+
+    <div id="categoryModal" class="hidden fixed inset-0 z-50 flex items-center justify-center bg-slate-950/60 px-4 py-6 backdrop-blur-sm">
+        <section class="admin-card w-full max-w-md p-5 sm:p-6">
+            <div class="mb-5 flex items-start justify-between gap-4">
+                <div>
+                    <h2 class="text-xl font-black">Add Category</h2>
+                    <p class="text-sm font-semibold text-slate-500">New categories appear in the admin filters.</p>
+                </div>
+                <button class="btn btn-secondary icon-btn" type="button" data-close-category-modal aria-label="Close">
+                    <i data-lucide="x" class="h-4 w-4"></i>
+                </button>
+            </div>
+            <form id="categoryForm" class="space-y-4">
+                <div>
+                    <label for="categoryName" class="field-label">Category Name</label>
+                    <input id="categoryName" class="form-control" type="text" required>
+                </div>
+                <div class="flex flex-col-reverse gap-2 pt-2 sm:flex-row sm:justify-end">
+                    <button class="btn btn-secondary" type="button" data-close-category-modal>Cancel</button>
+                    <button class="btn btn-primary" type="submit">
+                        <i data-lucide="save" class="h-4 w-4"></i>
+                        Save Category
+                    </button>
+                </div>
+            </form>
+        </section>
+    </div>
+
+    <script>
+        const STORAGE_KEY = 'eduriserClienteleAdminData';
+        const AUTH_KEY = 'eduriserClienteleAdminSignedIn';
+        const ADMIN_USER = 'admin';
+        const ADMIN_PASSWORD = 'admin123';
+
+        const seedCategories = [
+            'Automobile',
+            'BFSI',
+            'Chemical',
+            'Communication',
+            'Custom Content',
+            'Education',
+            'FMCG',
+            'Gamification',
+            'Health Care',
+            'Hospitality',
+            'Manufacturing & Engineering',
+            'Media',
+            'Oil & Gas',
+            'Pharma',
+            'Realty',
+            'Retail',
+            'Supply Chain',
+            'Technology'
+        ];
+
+        const seedClients = [
+            { name: 'Tabuk Pharmaceuticals', category: 'Pharma', url: 'https://tinyurl.com/36rwwnfh', logo: '', status: 'active' },
+            { name: 'Kashiv BioSciences', category: 'Pharma', url: 'https://tinyurl.com/y23v4etp', logo: '', status: 'active' },
+            { name: 'Vedant Fashions Limited', category: 'Retail', url: 'https://tinyurl.com/bdz9b5vp', logo: '', status: 'active' }
+        ];
+
+        let state = loadState();
+        let selectedCategory = 'All';
+
+        const loginView = document.getElementById('loginView');
+        const adminView = document.getElementById('adminView');
+        const loginForm = document.getElementById('loginForm');
+        const loginError = document.getElementById('loginError');
+        const usernameInput = document.getElementById('username');
+        const passwordInput = document.getElementById('password');
+        const logoutBtn = document.getElementById('logoutBtn');
+        const categoryList = document.getElementById('categoryList');
+        const clientRows = document.getElementById('clientRows');
+        const emptyState = document.getElementById('emptyState');
+        const searchInput = document.getElementById('searchInput');
+        const newClientBtn = document.getElementById('newClientBtn');
+        const clientModal = document.getElementById('clientModal');
+        const clientModalTitle = document.getElementById('clientModalTitle');
+        const clientForm = document.getElementById('clientForm');
+        const clientId = document.getElementById('clientId');
+        const clientName = document.getElementById('clientName');
+        const clientCategory = document.getElementById('clientCategory');
+        const clientStatus = document.getElementById('clientStatus');
+        const clientUrl = document.getElementById('clientUrl');
+        const clientLogo = document.getElementById('clientLogo');
+        const addCategoryBtn = document.getElementById('addCategoryBtn');
+        const categoryModal = document.getElementById('categoryModal');
+        const categoryForm = document.getElementById('categoryForm');
+        const categoryName = document.getElementById('categoryName');
+        const importInput = document.getElementById('importInput');
+        const exportBtn = document.getElementById('exportBtn');
+
+        function createId(prefix) {
+            return `${prefix}-${Date.now()}-${Math.random().toString(16).slice(2)}`;
+        }
+
+        function loadState() {
+            const saved = localStorage.getItem(STORAGE_KEY);
+            if (saved) {
+                try {
+                    const parsed = JSON.parse(saved);
+                    return {
+                        categories: Array.isArray(parsed.categories) ? parsed.categories : seedCategories,
+                        clients: Array.isArray(parsed.clients) ? parsed.clients : []
+                    };
+                } catch (error) {
+                    console.warn('Could not parse saved clientele data.', error);
+                }
+            }
+
+            return {
+                categories: seedCategories,
+                clients: seedClients.map(client => ({ ...client, id: createId('client') }))
+            };
+        }
+
+        function saveState() {
+            localStorage.setItem(STORAGE_KEY, JSON.stringify(state, null, 2));
+        }
+
+        function isSignedIn() {
+            return localStorage.getItem(AUTH_KEY) === 'true';
+        }
+
+        function setSignedIn(value) {
+            localStorage.setItem(AUTH_KEY, value ? 'true' : 'false');
+            loginView.classList.toggle('hidden', value);
+            adminView.classList.toggle('hidden', !value);
+            if (value) render();
+        }
+
+        function getFilteredClients() {
+            const query = searchInput.value.trim().toLowerCase();
+            return state.clients.filter(client => {
+                const matchesCategory = selectedCategory === 'All' || client.category === selectedCategory;
+                const searchable = `${client.name} ${client.category} ${client.url}`.toLowerCase();
+                return matchesCategory && searchable.includes(query);
+            });
+        }
+
+        function getCategoryCount(category) {
+            return state.clients.filter(client => category === 'All' || client.category === category).length;
+        }
+
+        function renderStats() {
+            document.getElementById('totalClients').textContent = state.clients.length;
+            document.getElementById('activeClients').textContent = state.clients.filter(client => client.status === 'active').length;
+            document.getElementById('totalCategories').textContent = state.categories.length;
+            document.getElementById('selectedCategoryStat').textContent = selectedCategory;
+        }
+
+        function renderCategories() {
+            const categories = ['All', ...state.categories];
+            categoryList.innerHTML = categories.map(category => `
+                <button class="category-tab ${selectedCategory === category ? 'active' : ''}" type="button" data-category="${escapeHtml(category)}">
+                    <span>${escapeHtml(category)}</span>
+                    <span class="category-count">${getCategoryCount(category)}</span>
+                </button>
+            `).join('');
+
+            categoryList.querySelectorAll('[data-category]').forEach(button => {
+                button.addEventListener('click', () => {
+                    selectedCategory = button.dataset.category;
+                    render();
+                });
+            });
+        }
+
+        function renderCategoryOptions() {
+            clientCategory.innerHTML = state.categories.map(category => `
+                <option value="${escapeHtml(category)}">${escapeHtml(category)}</option>
+            `).join('');
+        }
+
+        function renderClients() {
+            const clients = getFilteredClients();
+            document.getElementById('tableTitle').textContent = selectedCategory === 'All' ? 'All Clients' : selectedCategory;
+            document.getElementById('tableSubtitle').textContent = `${clients.length} ${clients.length === 1 ? 'record' : 'records'}`;
+            emptyState.classList.toggle('hidden', clients.length > 0);
+
+            clientRows.innerHTML = clients.map(client => `
+                <tr>
+                    <td>
+                        <div class="flex items-center gap-3">
+                            ${client.logo ? `<img src="${escapeAttribute(client.logo)}" alt="" class="h-10 w-10 rounded-lg border border-slate-200 object-contain p-1">` : `<span class="flex h-10 w-10 items-center justify-center rounded-lg border border-blue-100 bg-blue-50 text-xs font-black text-blue-700">${getInitials(client.name)}</span>`}
+                            <div>
+                                <p class="font-black text-slate-900">${escapeHtml(client.name)}</p>
+                                <p class="text-xs font-semibold text-slate-500">${escapeHtml(client.id)}</p>
+                            </div>
+                        </div>
+                    </td>
+                    <td class="font-bold text-slate-700">${escapeHtml(client.category)}</td>
+                    <td>
+                        <a class="max-w-xs truncate text-sm font-bold text-blue-700 hover:text-blue-900" href="${escapeAttribute(client.url)}" target="_blank" rel="noopener noreferrer">${escapeHtml(client.url)}</a>
+                    </td>
+                    <td>
+                        <button class="status-pill ${client.status === 'active' ? 'status-active' : 'status-paused'}" type="button" data-toggle-status="${client.id}">
+                            ${client.status === 'active' ? 'Active' : 'Paused'}
+                        </button>
+                    </td>
+                    <td>
+                        <div class="flex justify-end gap-2">
+                            <button class="btn btn-secondary icon-btn" type="button" title="Edit client" aria-label="Edit client" data-edit-client="${client.id}">
+                                <i data-lucide="pencil" class="h-4 w-4"></i>
+                            </button>
+                            <button class="btn btn-danger icon-btn" type="button" title="Delete client" aria-label="Delete client" data-delete-client="${client.id}">
+                                <i data-lucide="trash-2" class="h-4 w-4"></i>
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+            `).join('');
+
+            clientRows.querySelectorAll('[data-edit-client]').forEach(button => {
+                button.addEventListener('click', () => openClientModal(button.dataset.editClient));
+            });
+
+            clientRows.querySelectorAll('[data-delete-client]').forEach(button => {
+                button.addEventListener('click', () => deleteClient(button.dataset.deleteClient));
+            });
+
+            clientRows.querySelectorAll('[data-toggle-status]').forEach(button => {
+                button.addEventListener('click', () => toggleClientStatus(button.dataset.toggleStatus));
+            });
+        }
+
+        function render() {
+            renderStats();
+            renderCategories();
+            renderCategoryOptions();
+            renderClients();
+            lucide.createIcons();
+        }
+
+        function openClientModal(id = '') {
+            const client = id ? state.clients.find(item => item.id === id) : null;
+            clientModalTitle.textContent = client ? 'Edit Client' : 'Add Client';
+            clientId.value = client?.id || '';
+            clientName.value = client?.name || '';
+            clientCategory.value = client?.category || (selectedCategory !== 'All' ? selectedCategory : state.categories[0]);
+            clientStatus.value = client?.status || 'active';
+            clientUrl.value = client?.url || '';
+            clientLogo.value = client?.logo || '';
+            clientModal.classList.remove('hidden');
+            clientName.focus();
+        }
+
+        function closeClientModal() {
+            clientModal.classList.add('hidden');
+            clientForm.reset();
+        }
+
+        function saveClient(event) {
+            event.preventDefault();
+            const payload = {
+                name: clientName.value.trim(),
+                category: clientCategory.value,
+                status: clientStatus.value,
+                url: clientUrl.value.trim(),
+                logo: clientLogo.value.trim()
+            };
+
+            if (!payload.name || !payload.category || !payload.url) return;
+
+            if (clientId.value) {
+                state.clients = state.clients.map(client => client.id === clientId.value ? { ...client, ...payload } : client);
+            } else {
+                state.clients.push({ id: createId('client'), ...payload });
+            }
+
+            saveState();
+            closeClientModal();
+            render();
+        }
+
+        function deleteClient(id) {
+            const client = state.clients.find(item => item.id === id);
+            if (!client) return;
+            const confirmed = window.confirm(`Delete ${client.name}?`);
+            if (!confirmed) return;
+            state.clients = state.clients.filter(item => item.id !== id);
+            saveState();
+            render();
+        }
+
+        function toggleClientStatus(id) {
+            state.clients = state.clients.map(client => {
+                if (client.id !== id) return client;
+                return { ...client, status: client.status === 'active' ? 'paused' : 'active' };
+            });
+            saveState();
+            render();
+        }
+
+        function openCategoryModal() {
+            categoryName.value = '';
+            categoryModal.classList.remove('hidden');
+            categoryName.focus();
+        }
+
+        function closeCategoryModal() {
+            categoryModal.classList.add('hidden');
+            categoryForm.reset();
+        }
+
+        function saveCategory(event) {
+            event.preventDefault();
+            const name = categoryName.value.trim();
+            if (!name) return;
+            const exists = state.categories.some(category => category.toLowerCase() === name.toLowerCase());
+            if (!exists) {
+                state.categories.push(name);
+                state.categories.sort((a, b) => a.localeCompare(b));
+                selectedCategory = name;
+                saveState();
+                render();
+            }
+            closeCategoryModal();
+        }
+
+        function exportData() {
+            const blob = new Blob([JSON.stringify(state, null, 2)], { type: 'application/json' });
+            const url = URL.createObjectURL(blob);
+            const link = document.createElement('a');
+            link.href = url;
+            link.download = 'clientele-data.json';
+            link.click();
+            URL.revokeObjectURL(url);
+        }
+
+        function importData(event) {
+            const file = event.target.files?.[0];
+            if (!file) return;
+            const reader = new FileReader();
+            reader.onload = () => {
+                try {
+                    const parsed = JSON.parse(reader.result);
+                    if (!Array.isArray(parsed.categories) || !Array.isArray(parsed.clients)) {
+                        throw new Error('Invalid clientele data file.');
+                    }
+                    state = {
+                        categories: parsed.categories,
+                        clients: parsed.clients.map(client => ({ ...client, id: client.id || createId('client') }))
+                    };
+                    selectedCategory = 'All';
+                    saveState();
+                    render();
+                } catch (error) {
+                    window.alert('The selected JSON file could not be imported.');
+                } finally {
+                    importInput.value = '';
+                }
+            };
+            reader.readAsText(file);
+        }
+
+        function getInitials(name) {
+            return name
+                .split(/\s+/)
+                .filter(Boolean)
+                .slice(0, 2)
+                .map(word => word[0])
+                .join('')
+                .toUpperCase();
+        }
+
+        function escapeHtml(value) {
+            return String(value)
+                .replaceAll('&', '&amp;')
+                .replaceAll('<', '&lt;')
+                .replaceAll('>', '&gt;')
+                .replaceAll('"', '&quot;')
+                .replaceAll("'", '&#039;');
+        }
+
+        function escapeAttribute(value) {
+            return escapeHtml(value);
+        }
+
+        loginForm.addEventListener('submit', event => {
+            event.preventDefault();
+            const valid = usernameInput.value.trim() === ADMIN_USER && passwordInput.value === ADMIN_PASSWORD;
+            loginError.classList.toggle('hidden', valid);
+            if (valid) setSignedIn(true);
+        });
+
+        logoutBtn.addEventListener('click', () => setSignedIn(false));
+        searchInput.addEventListener('input', renderClients);
+        newClientBtn.addEventListener('click', () => openClientModal());
+        clientForm.addEventListener('submit', saveClient);
+        addCategoryBtn.addEventListener('click', openCategoryModal);
+        categoryForm.addEventListener('submit', saveCategory);
+        exportBtn.addEventListener('click', exportData);
+        importInput.addEventListener('change', importData);
+
+        document.querySelectorAll('[data-close-modal]').forEach(button => {
+            button.addEventListener('click', closeClientModal);
+        });
+
+        document.querySelectorAll('[data-close-category-modal]').forEach(button => {
+            button.addEventListener('click', closeCategoryModal);
+        });
+
+        clientModal.addEventListener('click', event => {
+            if (event.target === clientModal) closeClientModal();
+        });
+
+        categoryModal.addEventListener('click', event => {
+            if (event.target === categoryModal) closeCategoryModal();
+        });
+
+        document.addEventListener('keydown', event => {
+            if (event.key === 'Escape') {
+                closeClientModal();
+                closeCategoryModal();
+            }
+        });
+
+        setSignedIn(isSignedIn());
+        lucide.createIcons();
+    </script>
+</body>
+</html>

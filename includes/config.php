@@ -3,9 +3,9 @@ declare(strict_types=1);
 
 // Update these values after creating the MySQL database in GoDaddy cPanel.
 const DB_HOST = 'localhost';
-const DB_NAME = 'clientele';
-const DB_USER = 'clientele_admin';
-const DB_PASS = 'Abcd@2020206';
+const DB_NAME = 'demo_clientele';
+const DB_USER = 'root';
+const DB_PASS = '';
 
 const APP_NAME = 'Clientele Admin';
 const BASE_URL = '';
@@ -13,7 +13,7 @@ const APP_TIMEZONE = 'Asia/Kolkata';
 const DB_TIMEZONE_OFFSET = '+05:30';
 
 // Replace this with your own random 32+ character value before uploading.
-const APP_SECRET = 'a9f4c2d8e71b46a39f0c82e15d7b6a91f3e8c4b29d0a65f7';
+const APP_SECRET = 'demo_app_secret_placeholder_replace_in_production';
 
 const CLIENT_LOGO_UPLOAD_DIR = __DIR__ . '/../uploads/client-logos';
 const CLIENT_LOGO_PUBLIC_PATH = 'uploads/client-logos';
